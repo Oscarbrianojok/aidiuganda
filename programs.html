@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What We Do | AIDI Uganda</title>
+<meta name="description" content="AIDI Uganda is a community-rooted initiative transforming lives across Teso and Karamoja through education, climate-smart agriculture, health, advocacy, and partnership. We don't just serve communities. We grow with them.">
+<meta name="keywords" content="AIDI Uganda, Aojakitoi, Teso, Karamoja, Amuria, community-based organisation Uganda, local not-for-profit, community development, climate-smart agriculture, savings schemes">
+<link rel="icon" type="image/png" href="assets/aidi-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-theme="light">
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+<div class="scroll-progress" id="progress"></div>
+<header>
+  <div class="container nav-wrap">
+    <a href="index.html" class="logo" aria-label="AIDI Uganda home">
+      <img class="logo-image" src="assets/aidi-logo.png" alt="AIDI Aojakitoi Integrated Development Initiative">
+    </a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li class="nav-dropdown">
+          <a href="about.html">About Us</a>
+          <ul class="nav-submenu"><li><a href="where.html">Where We Work</a></li></ul>
+        </li>
+        <li><a href="programs.html">What We Do</a></li>
+        <li><a href="governance.html">Governance</a></li>
+        <li><a href="stories.html">Stories</a></li>
+        <li><a href="contact.html#contact">Contact Us</a></li>
+        <li><a href="donate.html" class="btn-donate">Donate</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Switch to dark mode">Dark mode</button>
+      <button class="menu-toggle" aria-label="Open menu" onclick="document.querySelector('nav ul').classList.toggle('open')">Menu</button>
+    </div>
+  </div>
+</header>
+<main class="interior-page">
+<!-- PROGRAMS -->
+<section class="section section-alt" id="programs">
+  <div class="container">
+    <div class="section-head fade-up">
+      <h2>What We Do</h2>
+      <div class="divider"></div>
+      <p>AIDI's work is organised around five core objectives.</p>
+    </div>
+    <div class="filter-bar fade-up">
+      <button class="filter-btn active" data-filter="all">All Programs</button>
+      <button class="filter-btn" data-filter="education">Education</button>
+      <button class="filter-btn" data-filter="agriculture">Agriculture</button>
+      <button class="filter-btn" data-filter="support">Community Support</button>
+      <button class="filter-btn" data-filter="economic">Economic</button>
+      <button class="filter-btn" data-filter="partnership">Partnership</button>
+      <button class="filter-btn" data-filter="environment">Environmental Protection</button>
+    </div>
+    <div class="objectives-grid">
+      <article class="objective-card fade-up" data-category="education">
+        <figure class="objective-image"><img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=900&q=80" alt="Children taking part in learning" loading="lazy"></figure>
+        <div class="objective-card-body">
+          <h3><span class="objective-title">Education & Family Capacity</span></h3>
+          <p>We promote learning, practical skills, and stronger families through education and support for school infrastructure.</p>
+          <button type="button" class="objective-link" onclick="openModal('education')" aria-haspopup="dialog">Learn more about this program</button>
+        </div>
+      </article>
+      <article class="objective-card fade-up" data-category="agriculture">
+        <figure class="objective-image"><img src="assets/hero-slide-3.jpg" alt="Farmers working in a field" loading="lazy"></figure>
+        <div class="objective-card-body">
+          <h3><span class="objective-title">Climate-Resilient Agriculture</span></h3>
+          <p>We help communities strengthen farming practices to withstand climate shocks and protect the land.</p>
+          <button type="button" class="objective-link" onclick="openModal('agriculture')" aria-haspopup="dialog">Learn more about this program</button>
+        </div>
+      </article>
+      <article class="objective-card fade-up" data-category="support">
+        <figure class="objective-image"><img src="https://images.unsplash.com/photo-1594398901394-4e34939a4fd0?auto=format&fit=crop&w=900&q=80" alt="Community building and outdoor space" loading="lazy"></figure>
+        <div class="objective-card-body">
+          <h3><span class="objective-title">Wholesome Community Support</span></h3>
+          <p>We promote inclusion, human rights, community health, and support for people facing vulnerability.</p>
+          <button type="button" class="objective-link" onclick="openModal('support')" aria-haspopup="dialog">Learn more about this program</button>
+        </div>
+      </article>
+      <article class="objective-card fade-up" data-category="economic">
+        <figure class="objective-image"><img src="assets/hero-slide-2.jpg" alt="Young plants growing in seed pots" loading="lazy"></figure>
+        <div class="objective-card-body">
+          <h3><span class="objective-title">Economic Programmes for Livelihoods</span></h3>
+          <p>We support savings, enterprise skills, and stronger livelihoods beyond subsistence farming.</p>
+          <button type="button" class="objective-link" onclick="openModal('economic')" aria-haspopup="dialog">Learn more about this program</button>
+        </div>
+      </article>
+      <article class="objective-card fade-up" data-category="partnership">
+        <figure class="objective-image"><img src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=900&q=80" alt="People working together on a community initiative" loading="lazy"></figure>
+        <div class="objective-card-body">
+          <h3><span class="objective-title">Partnership & Resource Mobilisation</span></h3>
+          <p>We work with local and international partners to advance community-led development.</p>
+          <button type="button" class="objective-link" onclick="openModal('partnership')" aria-haspopup="dialog">Learn more about this program</button>
+        </div>
+      </article>
+      <article class="objective-card fade-up" data-category="environment">
+        <figure class="objective-image"><img src="assets/hero-slide-4.jpg" alt="Hands preparing soil for planting" loading="lazy"></figure>
+        <div class="objective-card-body">
+          <h3><span class="objective-title">Environmental Protection</span></h3>
+          <p>We encourage practical community action to care for land, water, and natural resources.</p>
+          <button type="button" class="objective-link" onclick="openModal('environment')" aria-haspopup="dialog">Learn more about this program</button>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+</main>
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <div class="container fade-up">
+    <h2>Stay Connected</h2>
+    <p>Sign up to receive updates on our programmes, impact stories, and ways to get involved.</p>
+    <form class="newsletter-form" onsubmit="subscribe(event)">
+      <input type="email" name="email" placeholder="Enter your email" autocomplete="email" required>
+      <input type="text" name="website" class="newsletter-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button type="submit">Subscribe</button>
+    </form>
+    <p class="newsletter-consent">By subscribing, you agree to receive occasional email updates from AIDI. You can ask us to remove your address at any time.</p>
+    <p style="margin-top:16px;font-size:0.85rem;opacity:0.9;" id="newsletterMsg" role="status" aria-live="polite"></p>
+  </div>
+</section>
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img class="logo-image" src="assets/aidi-logo.png" alt="AIDI Aojakitoi Integrated Development Initiative">
+        </div>
+        <p style="font-size:0.9rem;">AIDI is a local, not-for-profit community-based organisation (CBO), registered in Aojakitoi Parish, Kuju Subcounty, Amuria District in 2026. We mobilise communities across Teso and Karamoja for inclusive, collective action.</p>
+        <div class="social">
+          <a href="#" title="Facebook">Facebook</a>
+          <a href="#" title="Twitter">X</a>
+          <a href="#" title="Instagram">Instagram</a>
+          <a href="#" title="LinkedIn">LinkedIn</a>
+          <a href="#" title="YouTube">YouTube</a>
+        </div>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="programs.html">What We Do</a></li>
+          <li><a href="where.html">Where We Work</a></li>
+          <li><a href="governance.html">Governance</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get Involved</h4>
+        <ul>
+          <li><a href="donate.html">Donate</a></li>
+          <li><a href="contact.html">Partner With Us</a></li>
+          <li><a href="contact.html">Volunteer</a></li>
+          <li><a href="contact.html">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Annual Reports</a></li>
+          <li><a href="#">Financial Statements</a></li>
+          <li><a href="#">Constitution</a></li>
+          <li><a href="contact.html#contact">Contact Us</a></li>
+          <li><a href="admin.html">Admin login</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Aojakitoi Integrated Development Initiative (AIDI) Uganda. All rights reserved. | Community-Based Organisation (CBO) · Local Not-for-Profit · Non-Partisan · Non-Denominational | Amuria District, Uganda</div>
+      <div class="footer-tagline">"We don't just serve communities. We grow with them."</div>
+    </div>
+  </div>
+</footer>
+<a href="donate.html#donate" class="float-donate" onclick="celebrate(event)">Donate</a>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="if(event.target===this) closeModal()">
+  <div class="modal-content">
+    <button class="modal-close" aria-label="Close dialog" onclick="closeModal()">Close</button>
+    <h3 id="modalTitle"></h3>
+    <p id="modalDesc"></p>
+    <ul id="modalList"></ul>
+    <a href="donate.html#donate" class="btn btn-primary" style="width:100%;justify-content:center;" onclick="closeModal();celebrate(event)">Support This Program</a>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+<script src="assets/supabase-config.js" defer></script>
+<script src="assets/cms-client.js" defer></script>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

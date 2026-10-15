@@ -1,0 +1,2208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIDI Uganda | Aojakitoi Integrated Development Initiative</title>
+<meta name="description" content="AIDI Uganda is a community-rooted initiative transforming lives across Teso and Karamoja through education, climate-smart agriculture, health, advocacy, and partnership.">
+<meta name="keywords" content="AIDI Uganda, Aojakitoi, Teso, Karamoja, Amuria, community-based organisation Uganda, local not-for-profit">
+<link rel="icon" type="image/png" href="../assets/aidi-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --brand-terracotta: #B4532A;
+  --brand-terracotta-dark: #8E3F1E;
+  --brand-terracotta-light: #D4714A;
+  --brand-ochre: #D89B2C;
+  --brand-ochre-dark: #B07F1F;
+  --brand-ochre-light: #E8B85C;
+  --brand-forest: #2E5339;
+  --brand-forest-dark: #1E3826;
+  --brand-forest-light: #4A7A5A;
+  --brand-cream: #FBF7F0;
+  --brand-cream-alt: #F4EDE1;
+  --brand-sand: #E8DCC8;
+  --brand-charcoal: #2B2521;
+  --brand-charcoal-soft: #57504A;
+  --primary: var(--brand-terracotta);
+  --primary-dark: var(--brand-terracotta-dark);
+  --primary-light: var(--brand-terracotta-light);
+  --secondary: var(--brand-forest);
+  --secondary-dark: var(--brand-forest-dark);
+  --accent: var(--brand-ochre);
+  --bg: var(--brand-cream);
+  --bg-alt: var(--brand-cream-alt);
+  --surface: #FFFFFF;
+  --text: var(--brand-charcoal);
+  --text-muted: var(--brand-charcoal-soft);
+  --border: var(--brand-sand);
+  --primary-soft: #F7E5DB;
+  --secondary-soft: #DEEAE1;
+  --accent-soft: #FAEFD5;
+  --shadow-sm: 0 2px 8px rgba(43,37,33,0.06);
+  --shadow-md: 0 8px 24px rgba(43,37,33,0.09);
+  --shadow-lg: 0 20px 48px rgba(43,37,33,0.14);
+  --shadow-primary: 0 10px 28px rgba(180,83,42,0.28);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+  --font: 'Barlow', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Barlow Condensed', 'Barlow', sans-serif;
+}
+[data-theme="dark"] {
+  --bg: #17130F;
+  --bg-alt: #1F1A15;
+  --surface: #241E18;
+  --text: #F4EDE1;
+  --text-muted: #B5A99A;
+  --border: #38302A;
+  --primary-soft: #3A2519;
+  --secondary-soft: #1F3327;
+  --accent-soft: #3A2E15;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.4);
+  --shadow-lg: 0 20px 48px rgba(0,0,0,0.5);
+  --shadow-primary: 0 10px 28px rgba(180,83,42,0.4);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--bg);
+  overflow-x: hidden;
+  transition: background var(--transition), color var(--transition);
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+ul { list-style: none; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+.scroll-progress {
+  position: fixed; top: 0; left: 0;
+  height: 3px; width: 0;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  z-index: 10000;
+  transition: width 0.1s linear;
+}
+
+header {
+  position: sticky; top: 0; z-index: 900;
+  background: rgba(251,247,240,0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition), border-color var(--transition);
+}
+[data-theme="dark"] header { background: rgba(23,19,15,0.94); }
+.nav-wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 0; gap: 20px;
+}
+.logo { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.logo-mark {
+  width: 44px; height: 44px;
+  background: var(--primary);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-family: var(--font-display);
+  font-weight: 800; font-size: 1.6rem;
+  letter-spacing: -0.5px;
+  box-shadow: 0 4px 12px rgba(180,83,42,0.3);
+}
+.logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+.logo-text strong {
+  font-family: var(--font-display);
+  font-weight: 800; font-size: 1.35rem;
+  color: var(--primary);
+  letter-spacing: 0.5px;
+}
+.logo-text span {
+  font-size: 0.68rem; font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.1em;
+}
+nav ul { display: flex; align-items: center; gap: 4px; }
+nav a {
+  padding: 8px 14px; font-size: 0.92rem; font-weight: 500;
+  color: var(--text); border-radius: 8px;
+  transition: background var(--transition), color var(--transition);
+  white-space: nowrap;
+}
+nav a:hover, nav a.active { background: var(--primary-soft); color: var(--primary); }
+.nav-dropdown { position: relative; }
+.nav-submenu {
+  position: absolute; top: 100%; left: 0;
+  min-width: 200px; background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow-md); padding: 8px;
+  opacity: 0; visibility: hidden; transform: translateY(-8px);
+  transition: all var(--transition);
+}
+.nav-dropdown:hover .nav-submenu { opacity: 1; visibility: visible; transform: translateY(4px); }
+.nav-submenu li a { display: block; width: 100%; }
+.menu-toggle { display: none; min-width: 68px; padding: 9px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); font-size: 0.9rem; font-weight: 700; }
+.theme-toggle {
+  min-width: 100px; height: 42px; padding: 8px 12px;
+  border: 1px solid var(--primary); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--surface); color: var(--text);
+  font-size: 0.82rem; font-weight: 700;
+  transition: all var(--transition);
+}
+.header-actions { display: flex; align-items: center; gap: 8px; margin-left: 12px; }
+.theme-toggle:hover { border-color: var(--primary); background: var(--primary-soft); }
+.btn-donate {
+  background: var(--primary) !important; color: #fff !important;
+  padding: 10px 22px !important; border-radius: 50px !important;
+  font-weight: 600 !important; letter-spacing: 0.3px;
+  box-shadow: 0 4px 12px rgba(180,83,42,0.25);
+}
+.btn-donate:hover {
+  background: var(--primary-dark) !important; color: #fff !important;
+  transform: translateY(-1px);
+}
+@media (max-width: 1050px) {
+  .menu-toggle { display: block; }
+  .header-actions { margin-left: auto; }
+  nav ul {
+    position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: stretch;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 16px 24px; gap: 4px;
+    max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
+  }
+  nav ul.open { max-height: 700px; }
+  nav a { padding: 12px 14px; }
+  .nav-submenu {
+    position: static; opacity: 1; visibility: visible;
+    transform: none; box-shadow: none; border: none;
+    padding: 0 0 0 16px; background: transparent;
+  }
+  .nav-dropdown:hover .nav-submenu { transform: none; }
+}
+@media (max-width: 500px) {
+  .logo-text span { display: none; }
+  .container { padding: 0 18px; }
+}
+
+.hero {
+  position: relative; min-height: 92vh;
+  display: flex; align-items: center;
+  color: #fff; overflow: hidden;
+  padding: 60px 0 100px;
+}
+.hero-slideshow, .hero-slide, .hero-overlay { position: absolute; inset: 0; }
+.hero-slide {
+  background-size: cover; background-position: center;
+  opacity: 0; transition: opacity 1.5s ease;
+}
+.hero-slide.active { opacity: 1; }
+.hero-overlay {
+  background: linear-gradient(135deg, rgba(30,56,38,0.88) 0%, rgba(90,40,20,0.72) 100%);
+  z-index: 1;
+}
+.hero .container { position: relative; z-index: 2; }
+.live-clock {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.14);
+  backdrop-filter: blur(8px);
+  padding: 6px 14px; border-radius: 50px;
+  font-size: 0.82rem; font-weight: 500;
+  letter-spacing: 0.4px; margin-bottom: 24px;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.live-clock .dot {
+  width: 8px; height: 8px; background: var(--brand-ochre-light);
+  border-radius: 50%; animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+.hero-content { max-width: 760px; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(216,155,44,0.18);
+  border: 1px solid rgba(216,155,44,0.5);
+  color: var(--brand-ochre-light);
+  padding: 8px 18px; border-radius: 50px;
+  font-size: 0.85rem; font-weight: 600; margin-bottom: 24px;
+  letter-spacing: 0.3px;
+}
+.live-dot {
+  width: 8px; height: 8px; background: var(--brand-ochre-light);
+  border-radius: 50%; animation: pulse 2s infinite;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800; line-height: 1.05;
+  letter-spacing: -0.02em; margin-bottom: 24px;
+  text-transform: uppercase;
+}
+.hero h1 span { color: var(--brand-ochre-light); }
+.hero p {
+  font-size: 1.15rem; line-height: 1.7;
+  margin-bottom: 36px; opacity: 0.95;
+  max-width: 640px;
+}
+.hero-dots { display: flex; gap: 10px; margin-bottom: 32px; }
+.hero-dot {
+  width: 40px; height: 3px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 3px; transition: all var(--transition);
+}
+.hero-dot.active { background: var(--brand-ochre); width: 60px; }
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-wave {
+  position: absolute; bottom: -1px; left: 0;
+  width: 100%; height: 80px; z-index: 3;
+}
+.hero-wave path { fill: var(--bg); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px; padding: 14px 30px;
+  border-radius: 50px; font-weight: 600;
+  font-size: 0.95rem; letter-spacing: 0.3px;
+  transition: all var(--transition); cursor: pointer; border: none;
+}
+.btn-primary {
+  background: var(--primary); color: #fff;
+  box-shadow: var(--shadow-primary);
+}
+.btn-primary:hover {
+  background: var(--primary-dark); transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(180,83,42,0.4);
+}
+.btn-outline {
+  background: transparent; color: #fff;
+  border: 1.5px solid rgba(255,255,255,0.55);
+}
+.btn-outline:hover { background: rgba(255,255,255,0.12); border-color: #fff; }
+
+.section { padding: 96px 0; }
+.section-alt { background: var(--bg-alt); }
+.section-head {
+  text-align: center; max-width: 720px; margin: 0 auto 64px;
+}
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800; letter-spacing: -0.01em;
+  margin-bottom: 16px; text-transform: uppercase;
+  color: var(--brand-forest);
+}
+[data-theme="dark"] .section-head h2 { color: var(--brand-ochre-light); }
+.section-head p { color: var(--text-muted); font-size: 1.08rem; }
+.divider {
+  width: 60px; height: 3px; background: var(--accent);
+  margin: 0 auto 20px; border-radius: 3px;
+}
+
+.stats { padding: 36px 0; background: var(--bg); overflow: hidden; }
+.stats-track { display: flex; width: max-content; gap: 18px; animation: statsSlide 36s linear infinite; }
+.stats-track:hover { animation-play-state: paused; }
+.stats-track.is-held { animation-play-state: paused; }
+.stats-grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px; width: min(1152px, calc(100vw - 48px));
+  flex: 0 0 min(1152px, calc(100vw - 48px));
+}
+.stats-carousel { max-width: 1200px; margin: 0 auto; overflow: hidden; }
+@keyframes statsSlide { to { transform: translateX(calc(-50% - 9px)); } }
+.stat-item {
+  width: 100%; height: 126px; min-height: 126px; perspective: 1200px;
+  background: none; border: none; padding: 0;
+  cursor: pointer; text-align: left; transition: transform var(--transition), box-shadow var(--transition);
+}
+.stat-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.stat-card-inner {
+  position: relative; display: block;
+  width: 100%; height: 100%;
+  transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+  transform-style: preserve-3d;
+}
+.stat-item:hover .stat-card-inner,
+.stat-item:focus .stat-card-inner,
+.stat-item[aria-pressed="true"] .stat-card-inner { transform: rotateY(180deg); }
+.stat-face {
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius);
+  padding: 12px 18px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  background: linear-gradient(135deg, var(--surface), var(--bg)); border: 1px solid var(--border);
+  border-top: 4px solid var(--brand-forest-light);
+  box-shadow: var(--shadow-sm);
+}
+.stat-item:nth-child(2) .stat-face-front { border-top-color: var(--primary); }
+.stat-item:nth-child(3) .stat-face-front { border-top-color: var(--accent); }
+.stat-face-back {
+  transform: rotateY(180deg);
+  background: var(--secondary); color: #fff;
+  border-color: var(--secondary);
+}
+.stat-back-title { font-size: 0.92rem; margin-bottom: 8px; }
+.stat-back-copy { font-size: 0.78rem; line-height: 1.35; }
+.stat-back-list { gap: 4px; font-size: 0.7rem; line-height: 1.2; }
+.stat-num {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3vw, 2.6rem); font-weight: 800;
+  color: var(--primary); line-height: 1; margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+.stat-label {
+  font-size: 0.9rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+.stat-back-title {
+  display: block; font-size: 0.84rem;
+  font-weight: 700; margin-bottom: 6px;
+  color: var(--brand-ochre-light);
+}
+.stat-back-copy {
+  display: block; font-size: 0.78rem;
+  line-height: 1.35; color: rgba(255,255,255,0.92);
+}
+.stat-back-list {
+  display: flex; flex-direction: column;
+  gap: 2px; font-size: 0.7rem;
+  line-height: 1.2; color: rgba(255,255,255,0.92);
+  text-align: left;
+}
+.stat-back-list span { padding-left: 11px; position: relative; }
+.stat-back-list span::before {
+  content: ''; position: absolute; left: 0; top: 5px;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--brand-ochre-light);
+}
+@media (max-width: 760px) {
+  .stats-grid { grid-template-columns: repeat(3, minmax(0, min(78vw, 320px))); gap: 14px; width: max-content; flex: 0 0 auto; }
+  .stat-item { height: 116px; min-height: 116px; }
+  .stat-face { padding: 10px 12px; }
+}
+
+.story-quote {
+  max-width: 860px; margin: 0 auto 80px;
+  padding: 40px 44px;
+  background: var(--surface);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  font-size: 1.1rem; line-height: 1.75;
+  font-style: italic; color: var(--text);
+}
+.story-quote cite {
+  display: block; margin-top: 20px;
+  font-style: normal; font-weight: 600;
+  color: var(--primary); font-size: 1rem;
+}
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 64px; align-items: center;
+}
+.about-img img {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 100%; height: 100%; object-fit: cover;
+  min-height: 420px;
+}
+.about-text h2 {
+  font-family: var(--font-display);
+  font-size: 2.2rem; font-weight: 800;
+  margin-bottom: 20px; letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--brand-forest);
+}
+[data-theme="dark"] .about-text h2 { color: var(--brand-ochre-light); }
+.about-text p { color: var(--text-muted); margin-bottom: 16px; font-size: 1.05rem; }
+.values {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin-top: 28px;
+}
+.value-item { display: flex; gap: 12px; align-items: flex-start; }
+.value-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent); margin-top: 8px; flex-shrink: 0;
+}
+.value-item strong {
+  display: block; font-size: 0.95rem;
+  font-weight: 700; color: var(--text);
+}
+.value-item span { font-size: 0.85rem; color: var(--text-muted); }
+
+.mission-carousel { margin: 80px auto 0; overflow: hidden; }
+.mission-track { display: flex; width: max-content; gap: 24px; animation: missionSlide 104s linear infinite; }
+.mission-track:hover { animation-play-state: paused; }
+.mission-grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  width: min(1000px, calc(100vw - 48px)); flex: 0 0 min(1000px, calc(100vw - 48px));
+}
+.mission-carousel .mission-card {
+  display: flex; min-height: 340px; flex-direction: column;
+  align-items: stretch; justify-content: flex-start;
+  background: #205548; border: 0; border-radius: 0;
+  padding: clamp(24px, 3vw, 34px); text-align: left;
+  box-shadow: none; transition: all var(--transition);
+}
+.mission-carousel .mission-card:nth-child(2) { border-top: 0; }
+.mission-carousel .mission-card:nth-child(3) { border-top: 0; }
+.mission-carousel .mission-card:hover {
+  background: #276252; box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+  transform: translateY(-4px);
+}
+.mission-carousel .mission-card h3 {
+  font-family: var(--font-display); font-size: clamp(1.55rem, 2.5vw, 2rem);
+  font-weight: 700; margin-bottom: 16px; text-align: left;
+  text-transform: none; letter-spacing: 0; color: #fff;
+}
+.mission-carousel .mission-card p { font-size: 1rem; line-height: 1.6; color: rgba(255,255,255,0.9); text-align: left; }
+@media (max-width: 760px) {
+  .mission-carousel { margin-top: 60px; }
+  .mission-grid { width: max-content; flex: 0 0 auto; grid-template-columns: repeat(3, minmax(0, min(78vw, 320px))); gap: 16px; }
+  .mission-carousel .mission-card { min-height: 0; }
+}
+@keyframes missionSlide { to { transform: translateX(calc(-50% - 12px)); } }
+
+.filter-bar {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 8px; margin-bottom: 48px;
+}
+.filter-btn {
+  padding: 9px 20px; border-radius: 50px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 0.88rem; font-weight: 600;
+  color: var(--text-muted); transition: all var(--transition);
+}
+.filter-btn:hover { border-color: var(--primary); color: var(--primary); }
+.filter-btn.active {
+  background: var(--primary); color: #fff;
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(180,83,42,0.25);
+}
+
+.objectives-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 28px;
+}
+.objective-card {
+  position: relative; background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 40px 32px; cursor: pointer;
+  transition: all var(--transition); overflow: hidden;
+}
+.objective-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.objective-card:hover::before { transform: scaleX(1); }
+.objective-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-light);
+}
+.objective-num {
+  display: block; margin-bottom: 12px;
+  color: var(--primary); font-size: 0.78rem;
+  font-weight: 700; letter-spacing: 0.12em;
+}
+.objective-card:nth-child(even) .objective-num { color: var(--brand-forest); }
+.objective-card h3 {
+  font-size: 1.25rem; font-weight: 700;
+  margin-bottom: 12px; letter-spacing: -0.01em;
+  color: var(--brand-forest);
+}
+[data-theme="dark"] .objective-card h3 { color: var(--brand-ochre-light); }
+.objective-card p { font-size: 0.96rem; line-height: 1.65; color: var(--text-muted); }
+
+.location-card {
+  display: grid; grid-template-columns: 1.4fr 1fr;
+  gap: 48px; align-items: center;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 32px; box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+}
+.location-map {
+  width: 100%; height: 380px;
+  border: none; border-radius: var(--radius);
+  filter: saturate(0.9);
+}
+.location-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.8rem; font-weight: 800;
+  margin-bottom: 16px; text-transform: uppercase;
+  color: var(--brand-forest);
+}
+[data-theme="dark"] .location-card h3 { color: var(--brand-ochre-light); }
+.location-card p { color: var(--text-muted); margin-bottom: 24px; font-size: 1.02rem; line-height: 1.7; }
+
+.timeline {
+  max-width: 820px; margin: 0 auto;
+  position: relative; padding-left: 40px;
+}
+.timeline::before {
+  content: ''; position: absolute; left: 8px; top: 8px; bottom: 8px;
+  width: 2px; background: linear-gradient(180deg, var(--primary), var(--accent));
+  border-radius: 2px;
+}
+.timeline-item { position: relative; padding-bottom: 48px; }
+.timeline-item::before {
+  content: ''; position: absolute; left: -40px; top: 6px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--bg); border: 3px solid var(--primary);
+}
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-year {
+  display: inline-block; font-size: 0.82rem;
+  font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--accent); margin-bottom: 8px;
+}
+.timeline-item h3 {
+  font-size: 1.3rem; font-weight: 700;
+  margin-bottom: 10px; letter-spacing: -0.01em;
+  color: var(--brand-forest);
+}
+[data-theme="dark"] .timeline-item h3 { color: var(--brand-ochre-light); }
+.timeline-item p { color: var(--text-muted); font-size: 1rem; line-height: 1.7; }
+
+.governance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.governance-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-top: 3px solid var(--secondary);
+  border-radius: var(--radius); padding: 28px;
+  transition: all var(--transition);
+}
+.governance-card:nth-child(even) { border-top-color: var(--primary); }
+.governance-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-light);
+}
+.governance-card h3 {
+  font-size: 1.15rem; font-weight: 700;
+  margin-bottom: 10px; letter-spacing: -0.01em;
+  color: var(--brand-forest);
+}
+[data-theme="dark"] .governance-card h3 { color: var(--brand-ochre-light); }
+.governance-card p { font-size: 0.94rem; line-height: 1.6; color: var(--text-muted); }
+.governance-card a { color: var(--primary); font-weight: 600; }
+.governance-card a:hover { text-decoration: underline; }
+
+.governance-structure-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.governance-structure-grid > .governance-card {
+  min-height: 168px;
+  padding: 28px 26px;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--brand-forest-dark);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(30,56,38,0.16);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.governance-structure-grid > .governance-card:nth-child(3n + 2) {
+  background: var(--brand-terracotta);
+  box-shadow: 0 10px 24px rgba(180,83,42,0.16);
+}
+.governance-structure-grid > .governance-card:nth-child(3n) {
+  background: var(--brand-ochre);
+  color: var(--brand-charcoal);
+  box-shadow: 0 10px 24px rgba(216,155,44,0.18);
+}
+.governance-structure-grid > .governance-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(43,37,33,0.2);
+}
+.governance-structure-grid > .governance-card h3 {
+  color: inherit;
+}
+.governance-structure-grid > .governance-card p {
+  color: rgba(255,255,255,0.9);
+}
+.governance-structure-grid > .governance-card:nth-child(3n) p {
+  color: rgba(43,37,33,0.84);
+}
+@media (max-width: 900px) {
+  .governance-structure-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .governance-structure-grid { grid-template-columns: 1fr; }
+}
+
+.team-section { margin-top: 96px; text-align: center; }
+.team-section h2 {
+  font-family: var(--font-display);
+  font-size: 2.2rem; font-weight: 800;
+  margin-bottom: 48px; text-transform: uppercase;
+  color: var(--brand-forest);
+}
+[data-theme="dark"] .team-section h2 { color: var(--brand-ochre-light); }
+.team-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px; max-width: 900px; margin: 0 auto;
+}
+.team-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 32px 20px;
+  transition: all var(--transition);
+}
+.team-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--primary-light); }
+.team-photo {
+  width: 120px; height: 120px; border-radius: 50%;
+  object-fit: cover; margin: 0 auto 20px;
+  border: 3px solid var(--primary-soft);
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 2.4rem;
+  font-weight: 800; color: #fff;
+}
+.team-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+.team-role {
+  font-size: 0.82rem; color: var(--primary);
+  font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+}
+
+.testimonials { background: var(--secondary-soft); }
+[data-theme="dark"] .testimonials { background: var(--bg-alt); }
+.carousel {
+  max-width: 860px; margin: 0 auto;
+  position: relative; min-height: 300px;
+}
+.testimonial-slide { display: none; text-align: center; padding: 40px 24px; }
+.testimonial-slide.active { display: block; animation: fadeIn 0.6s ease; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.testimonial-slide blockquote {
+  font-size: 1.25rem; line-height: 1.75;
+  font-style: italic; color: var(--text);
+  margin-bottom: 28px; font-weight: 400;
+}
+.testimonial-slide cite {
+  font-style: normal; font-weight: 700;
+  color: var(--brand-forest); display: block; font-size: 1rem;
+}
+[data-theme="dark"] .testimonial-slide cite { color: var(--brand-ochre-light); }
+.testimonial-slide cite span {
+  display: block; font-weight: 500; font-size: 0.85rem;
+  color: var(--text-muted); margin-top: 4px;
+}
+.carousel-dots { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+.carousel-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--border); transition: all var(--transition);
+}
+.carousel-dot.active { background: var(--primary); transform: scale(1.3); }
+
+.cta {
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--primary-dark) 100%);
+  color: #fff; text-align: center;
+}
+.cta h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800; margin-bottom: 20px;
+  text-transform: uppercase;
+  color: #fff;
+}
+.cta p {
+  max-width: 720px; margin: 0 auto 18px;
+  font-size: 1.08rem; line-height: 1.7; opacity: 0.95;
+}
+.cta .btn { background: var(--accent); color: #fff; margin-top: 16px; }
+.cta .btn:hover { background: var(--brand-ochre-dark); transform: translateY(-2px); }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px; margin-bottom: 56px;
+}
+.contact-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-top: 3px solid var(--primary);
+  border-radius: var(--radius); padding: 28px;
+  text-align: left; transition: all var(--transition);
+}
+.contact-card:nth-child(2) { border-top-color: var(--secondary); }
+.contact-card:nth-child(3) { border-top-color: var(--accent); }
+.contact-card:hover {
+  transform: translateY(-4px); box-shadow: var(--shadow-md);
+  border-color: var(--primary-light);
+}
+.contact-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; color: var(--brand-forest); }
+[data-theme="dark"] .contact-card h3 { color: var(--brand-ochre-light); }
+.contact-card p { color: var(--text-muted); font-size: 0.98rem; line-height: 1.6; }
+.contact-card a { color: var(--primary); font-weight: 600; }
+.contact-card a:hover { text-decoration: underline; }
+
+.contact-form {
+  max-width: 680px; margin: 0 auto;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 44px 40px;
+  box-shadow: var(--shadow-sm);
+}
+.form-group { margin-bottom: 22px; }
+.form-group label {
+  display: block; font-size: 0.88rem;
+  font-weight: 600; margin-bottom: 8px; color: var(--text);
+}
+.form-group input,
+.form-group textarea {
+  width: 100%; padding: 13px 16px;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--bg); color: var(--text);
+  font-family: inherit; font-size: 0.98rem;
+  transition: all var(--transition);
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none; border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
+.form-group textarea { min-height: 140px; resize: vertical; }
+.form-notice {
+  margin-top: 16px; font-size: 0.9rem;
+  color: var(--primary); font-weight: 500;
+  min-height: 20px;
+}
+
+.newsletter {
+  background: var(--secondary); color: #fff;
+  padding: 72px 0; text-align: center;
+  position: relative;
+}
+.newsletter::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+}
+.newsletter h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  font-weight: 800; margin-bottom: 12px;
+  text-transform: uppercase; color: #fff;
+}
+.newsletter p { opacity: 0.92; margin-bottom: 28px; font-size: 1.02rem; }
+.newsletter-form {
+  display: flex; max-width: 520px; margin: 0 auto;
+  gap: 10px; flex-wrap: wrap; justify-content: center;
+}
+.newsletter-form input[type="email"] {
+  flex: 1; min-width: 220px;
+  padding: 14px 20px; border-radius: 50px;
+  border: none; font-size: 0.98rem;
+  font-family: inherit; background: #fff; color: #2B2521;
+}
+.newsletter-form input[type="email"]:focus {
+  outline: 3px solid rgba(216,155,44,0.4);
+}
+.newsletter-form button {
+  padding: 14px 32px; border-radius: 50px;
+  background: var(--accent); color: #fff;
+  font-weight: 700; font-size: 0.95rem;
+  letter-spacing: 0.4px; transition: all var(--transition);
+}
+.newsletter-form button:hover { background: var(--brand-ochre-dark); transform: translateY(-1px); }
+.newsletter-honeypot {
+  position: absolute; left: -9999px;
+  width: 1px; height: 1px; opacity: 0;
+}
+.newsletter-consent {
+  font-size: 0.82rem; opacity: 0.75;
+  margin-top: 16px; max-width: 520px;
+  margin-left: auto; margin-right: auto;
+}
+
+footer {
+  background: var(--secondary-dark); color: #DDE5DF;
+  padding: 72px 0 32px;
+}
+[data-theme="dark"] footer { background: #0E1310; }
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px; margin-bottom: 48px;
+}
+.footer-brand .logo-mark { margin-bottom: 16px; background: var(--primary); }
+footer h4 {
+  font-family: var(--font-display);
+  font-size: 1.05rem; font-weight: 700;
+  color: var(--brand-ochre-light); margin-bottom: 18px;
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+footer ul li { margin-bottom: 10px; }
+footer ul a {
+  color: #A8B4AC; font-size: 0.92rem;
+  transition: color var(--transition);
+}
+footer ul a:hover { color: var(--brand-ochre-light); }
+footer p { color: #A8B4AC; font-size: 0.92rem; line-height: 1.6; }
+.social { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 20px; }
+.social a {
+  color: #A8B4AC; font-size: 0.9rem;
+  transition: color var(--transition);
+}
+.social a:hover { color: var(--brand-ochre-light); text-decoration: underline; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 28px; display: flex;
+  justify-content: space-between; align-items: center;
+  gap: 20px; flex-wrap: wrap;
+  font-size: 0.85rem; color: #8A968F;
+}
+.footer-tagline { font-style: italic; color: var(--brand-ochre-light); }
+
+.float-donate {
+  position: fixed; bottom: 28px; right: 28px;
+  background: var(--primary); color: #fff !important;
+  padding: 14px 26px; border-radius: 50px;
+  font-weight: 700; font-size: 0.88rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  box-shadow: 0 12px 32px rgba(180,83,42,0.45);
+  z-index: 800; transition: all var(--transition);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.float-donate:hover {
+  background: var(--primary-dark); transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(180,83,42,0.55);
+}
+
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(30,56,38,0.7);
+  backdrop-filter: blur(4px);
+  display: none; align-items: center; justify-content: center;
+  z-index: 2000; padding: 20px;
+  opacity: 0; transition: opacity var(--transition);
+}
+.modal-overlay.open { display: flex; opacity: 1; }
+.modal-content {
+  background: var(--surface); border-radius: var(--radius-lg);
+  padding: 44px 36px; max-width: 560px; width: 100%;
+  position: relative; box-shadow: var(--shadow-lg);
+  max-height: 90vh; overflow-y: auto;
+  animation: modalIn 0.3s ease;
+  border-top: 4px solid var(--accent);
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.modal-close {
+  position: absolute; top: 16px; right: 16px;
+  padding: 8px 12px; border: 1px solid var(--border);
+  border-radius: 8px; background: var(--bg-alt); color: var(--text);
+  font-size: 0.8rem; font-weight: 700;
+  transition: background var(--transition);
+}
+.modal-close:hover { background: var(--border); }
+.modal-content h3 {
+  font-family: var(--font-display);
+  font-size: 1.6rem; font-weight: 800;
+  text-align: center; margin-bottom: 14px;
+  text-transform: uppercase;
+  color: var(--brand-forest);
+}
+[data-theme="dark"] .modal-content h3 { color: var(--brand-ochre-light); }
+.modal-content p {
+  color: var(--text-muted); font-size: 1rem;
+  line-height: 1.7; margin-bottom: 20px; text-align: center;
+}
+.modal-content ul { margin-bottom: 24px; padding-left: 4px; }
+.modal-content ul li {
+  padding: 10px 0 10px 24px;
+  position: relative; font-size: 0.95rem;
+  color: var(--text); border-bottom: 1px solid var(--border);
+  line-height: 1.55;
+}
+.modal-content ul li:last-child { border-bottom: none; }
+.modal-content ul li::before {
+  content: ''; position: absolute; left: 0; top: 17px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent);
+}
+
+.page { display: none; }
+.page.active { display: block; animation: pageIn 0.4s ease; }
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-up {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  .section { padding: 72px 0; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .values { grid-template-columns: 1fr; }
+  .location-card { grid-template-columns: 1fr; gap: 28px; padding: 24px; }
+  .location-map { height: 300px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .story-quote { padding: 32px 28px; font-size: 1.02rem; }
+  .contact-form { padding: 32px 24px; }
+  .float-donate { bottom: 18px; right: 18px; padding: 12px 20px; font-size: 0.8rem; }
+  .hero { min-height: 88vh; }
+  .hero h1 { font-size: clamp(2rem, 8vw, 3rem); }
+}
+@media (max-width: 600px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .stats { padding: 28px 0; }
+  .stat-num { font-size: 2.3rem; }
+  .timeline { padding-left: 28px; }
+  .timeline-item::before { left: -28px; width: 14px; height: 14px; }
+  .newsletter-form { flex-direction: column; }
+  .newsletter-form button { width: 100%; }
+}
+</style>
+</head>
+<body data-theme="light">
+
+<div class="scroll-progress" id="progress"></div>
+
+<header>
+  <div class="container nav-wrap">
+    <a href="#home" class="logo" data-nav="home" aria-label="AIDI Uganda home">
+      <span class="logo-mark">A</span>
+      <span class="logo-text">
+        <strong>AIDI UGANDA</strong>
+        <span>Aojakitoi Integrated Development Initiative</span>
+      </span>
+    </a>
+    <nav>
+      <ul id="navList">
+        <li><a href="#home" data-nav="home" class="active">Home</a></li>
+        <li class="nav-dropdown">
+          <a href="#about" data-nav="about">About Us</a>
+          <ul class="nav-submenu">
+            <li><a href="#where" data-nav="where">Where We Work</a></li>
+          </ul>
+        </li>
+        <li><a href="#programs" data-nav="programs">What We Do</a></li>
+        <li><a href="#governance" data-nav="governance">Governance</a></li>
+        <li><a href="#stories" data-nav="stories">Stories</a></li>
+        <li><a href="#contact" data-nav="contact">Contact Us</a></li>
+        <li><a href="#donate" data-nav="donate" class="btn-donate">Donate</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Toggle dark mode">
+        
+        <span class="theme-label">Dark mode</span>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">Menu</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="page active" id="page-home">
+
+<section class="hero">
+  <div class="hero-slideshow" id="heroSlideshow">
+    <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1594398901394-4e34939a4fd0?auto=format&fit=crop&w=1600&q=80');"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1600&q=80');"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=1600&q=80');"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=1600&q=80');"></div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="live-clock"><span class="dot"></span>Uganda: <span id="clock">--:--</span> EAT</div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="live-dot"></span>
+        Local not-for-profit CBO, registered in 2026
+      </div>
+      <h1>Empowering Communities,<br><span>Growing Futures</span></h1>
+      <p>AIDI Uganda is a community-rooted initiative transforming lives across Teso and Karamoja, through education, climate-smart agriculture, health, advocacy, and partnership. We don't just serve communities. <strong>We grow with them.</strong></p>
+      <div class="hero-dots" id="heroDots">
+        <button class="hero-dot active" data-slide="0" aria-label="Slide 1"></button>
+        <button class="hero-dot" data-slide="1" aria-label="Slide 2"></button>
+        <button class="hero-dot" data-slide="2" aria-label="Slide 3"></button>
+        <button class="hero-dot" data-slide="3" aria-label="Slide 4"></button>
+      </div>
+      <div class="hero-btns">
+        <a href="#donate" data-nav="donate" class="btn btn-primary">Donate Now</a>
+        <a href="#programs" data-nav="programs" class="btn btn-outline">Our Programmes</a>
+      </div>
+    </div>
+  </div>
+  <svg class="hero-wave" viewBox="0 0 1440 100" preserveAspectRatio="none">
+    <path d="M0,50 C320,100 420,0 720,50 C1020,100 1120,0 1440,50 L1440,100 L0,100 Z"></path>
+  </svg>
+</section>
+
+<section class="stats">
+  <div class="stats-carousel" aria-label="AIDI at a glance">
+    <div class="stats-track">
+      <div class="stats-grid">
+        <button class="stat-item fade-up" type="button" aria-label="Founded in 2026" aria-pressed="false">
+          <span class="stat-card-inner">
+            <span class="stat-face stat-face-front">
+              <span class="stat-num" data-count="2026">0</span>
+              <span class="stat-label">Founded</span>
+            </span>
+            <span class="stat-face stat-face-back" aria-hidden="true">
+              <span class="stat-back-title">Where AIDI began</span>
+              <span class="stat-back-copy">Aojakitoi Parish, Kuju Subcounty, Amuria District, Uganda.</span>
+            </span>
+          </span>
+        </button>
+        <button class="stat-item fade-up" type="button" aria-label="Five core objectives" aria-pressed="false">
+          <span class="stat-card-inner">
+            <span class="stat-face stat-face-front">
+              <span class="stat-num" data-count="5">0</span>
+              <span class="stat-label">Core Objectives</span>
+            </span>
+            <span class="stat-face stat-face-back" aria-hidden="true">
+              <span class="stat-back-title">Our core objectives</span>
+              <span class="stat-back-list">
+                <span>Education and family capacity</span>
+                <span>Climate-resilient agriculture</span>
+                <span>Wholesome community support</span>
+                <span>Economic programmes for livelihoods</span>
+                <span>Partnership and resource mobilisation</span>
+              </span>
+            </span>
+          </span>
+        </button>
+        <button class="stat-item fade-up" type="button" aria-label="Two regions served" aria-pressed="false">
+          <span class="stat-card-inner">
+            <span class="stat-face stat-face-front">
+              <span class="stat-num" data-count="2">0</span>
+              <span class="stat-label">Regions Served</span>
+            </span>
+            <span class="stat-face stat-face-back" aria-hidden="true">
+              <span class="stat-back-title">Our regions</span>
+              <span class="stat-back-copy">Teso and Karamoja</span>
+            </span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="container">
+    <div class="section-head fade-up">
+      <h2>About AIDI Uganda</h2>
+      <div class="divider"></div>
+      <p>Born from the community, for the community.</p>
+    </div>
+
+    <div class="story-quote fade-up">
+      AIDI was born in 2026, in a room in Aojakitoi Parish, Kuju Subcounty, Amuria District, where a group of community promoters kept arriving at the same conclusion: the services that Teso depends on are stretched beyond their capacity. The providers exist, they simply cannot reach everyone who needs them.
+      <cite>So we decided to become part of the answer.</cite>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-img fade-up">
+        <img src="https://images.unsplash.com/photo-1594398901394-4e34939a4fd0?auto=format&fit=crop&w=800&q=80" alt="AIDI community work in Uganda">
+      </div>
+      <div class="about-text fade-up">
+        <h2>Who We Are</h2>
+        <p>AIDI is a local, not-for-profit community-based organisation (CBO) in Uganda. We are non-partisan and non-denominational, serving communities regardless of religion, tribe, colour, or race.</p>
+        <p>Our work is organised around five core objectives and guided by a simple belief: that development works best when it is <strong>locally led</strong>.</p>
+        <div class="values">
+          <div class="value-item"><div class="value-dot"></div><div><strong>Non-Partisan</strong><span>Beyond politics</span></div></div>
+          <div class="value-item"><div class="value-dot"></div><div><strong>Non-Denominational</strong><span>Beyond religion</span></div></div>
+          <div class="value-item"><div class="value-dot"></div><div><strong>Community-Rooted</strong><span>Local leadership</span></div></div>
+          <div class="value-item"><div class="value-dot"></div><div><strong>Transparent</strong><span>Audited & accountable</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="max-width:900px;margin:80px auto 0;" class="fade-up">
+      <h2 style="text-align:center;margin-bottom:24px;font-family:var(--font-display);text-transform:uppercase;font-size:2rem;color:var(--brand-forest);">Why We Were Founded</h2>
+      <p style="color:var(--text-muted);font-size:1.05rem;">AIDI emerged from a clear-eyed reading of the realities facing our communities. The experience of pandemics and disease, entrenched poverty, harmful cultural beliefs and practices, inadequate service delivery, poor infrastructure, weak agricultural practices, and limited advocacy skills have left many families in situations of extreme deprivation, vulnerability, and displacement. Famine, low skills, and high poverty have become familiar conditions rather than exceptions.</p>
+      <p style="color:var(--text-muted);font-size:1.05rem;">At the same time, the traditional support systems that communities once relied on (community farming support, poverty eradication strategies, capacity-building providers, and lobby and advocacy services) are overwhelmed. They can no longer keep pace with the scale of need. AIDI was constituted to help close that gap.</p>
+    </div>
+
+    <div class="mission-carousel">
+      <div class="mission-track">
+      <div class="mission-grid">
+        <div class="mission-card fade-up">
+          
+          <h3>Our Mission</h3>
+          <p>To mobilise communities for inclusive and collective action in the improvement of poor infrastructure, commercial agriculture enhancement, social inclusion, and improved livelihoods through community engagement and participatory development.</p>
+        </div>
+        <div class="mission-card fade-up">
+          
+          <h3>Our Vision</h3>
+          <p>To eradicate poverty in the community.</p>
+          <p style="margin-top:14px;">We work toward thriving communities where families can build secure livelihoods and shape their own development.</p>
+        </div>
+        <div class="mission-card fade-up">
+          
+          <h3>Our Goal</h3>
+          <p>To be a leading community-based initiative in promoting infrastructure, sustainable agriculture, climate resilience, poverty eradication, and community empowerment.</p>
+        </div>
+      </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head fade-up">
+      <h2>What We Do</h2>
+      <div class="divider"></div>
+      <p>AIDI's work is organised around five core objectives.</p>
+    </div>
+    <div class="objectives-grid">
+      <div class="objective-card fade-up" onclick="openModal('education')">
+        <span class="objective-num">01</span>
+        
+        <h3>Education & Family Capacity</h3>
+        <p>We promote formal and informal educational activities that build families' skills, including adult literacy, vocational education, and support for school infrastructure.</p>
+      </div>
+      <div class="objective-card fade-up" onclick="openModal('agriculture')">
+        <span class="objective-num">02</span>
+        
+        <h3>Climate-Resilient Agriculture</h3>
+        <p>We build awareness and practices around farming that withstand climate shocks and preserve the land for future generations.</p>
+      </div>
+      <div class="objective-card fade-up" onclick="openModal('support')">
+        <span class="objective-num">03</span>
+        
+        <h3>Wholesome Community Support</h3>
+        <p>We support society broadly through education and infrastructure development, human rights, psycho-social counselling, and community health promotion.</p>
+      </div>
+      <div class="objective-card fade-up" onclick="openModal('economic')">
+        <span class="objective-num">04</span>
+        
+        <h3>Economic Programmes for Livelihoods</h3>
+        <p>Member-run savings and lending schemes, collective bargaining for inputs and produce, and enterprise skills that create income beyond subsistence farming.</p>
+      </div>
+      <div class="objective-card fade-up" onclick="openModal('partnership')">
+        <span class="objective-num">05</span>
+        
+        <h3>Partnership & Resource Mobilisation</h3>
+        <p>We partner with other actors and international donors to advance community development, reaching further as a registered group than individual efforts can alone.</p>
+      </div>
+      <div class="objective-card fade-up" onclick="openModal('environment')">
+        <span class="objective-num">06</span>
+        
+        <h3>Environmental Protection</h3>
+        <p>We promote care for natural resources and practical actions that protect the land, water, and environment on which community livelihoods depend.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head fade-up">
+      <h2>Where We Work</h2>
+      <div class="divider"></div>
+      <p>Rooted in Teso, reaching the hard-to-reach.</p>
+    </div>
+    <div class="location-card fade-up">
+      <iframe
+        class="location-map"
+        title="Live Google Map showing the AIDI location in Awojaitoi, Amuria District"
+        src="https://www.google.com/maps?q=2.177503,33.553347&amp;z=15&amp;output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen>
+      </iframe>
+      <div>
+        <h3>Teso and Karamoja</h3>
+        <p>AIDI is rooted in Aojakitoi Parish, Kuju Subcounty, Amuria District, and works with communities in Teso and Karamoja.</p>
+        <a class="btn btn-primary" href="https://maps.app.goo.gl/Q9k5MGoZpjSfDt8W7" target="_blank" rel="noopener noreferrer">Open Pin in Google Maps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head fade-up">
+      <h2>Our Story</h2>
+      <div class="divider"></div>
+      <p>From a room in Aojakitoi Parish to a growing community movement.</p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item fade-up">
+        <div class="timeline-year">2026: The Beginning</div>
+        <h3>Founded in Aojakitoi Parish</h3>
+        <p>A group of community promoters came together around a shared conviction: the services Teso depends on are stretched beyond capacity. AIDI was constituted to help close that gap.</p>
+      </div>
+      <div class="timeline-item fade-up">
+        <div class="timeline-year">Today: Standing Alongside the Hard-to-Reach</div>
+        <h3>Working in Kuju Subcounty and across Teso</h3>
+        <p>Our approach begins with the community itself: identifying who is excluded, understanding why, and building the local structures that can carry services the last mile.</p>
+      </div>
+      <div class="timeline-item fade-up">
+        <div class="timeline-year">Tomorrow: Where We Are Going</div>
+        <h3>Growing Savings, Agriculture, and Protection</h3>
+        <p>We intend to grow our savings and lending scheme from a handful of members to a functioning community financial institution; expand our agricultural work from demonstration to scale; and build genuine protection capacity.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head fade-up">
+      <h2>How We Are Governed</h2>
+      <div class="divider"></div>
+      <p>AIDI is governed by a Board of Executives of seven founder members, working jointly with a Top Management and Planning Committee. Day-to-day implementation is carried out by the Secretariat.</p>
+    </div>
+    <div class="governance-grid governance-structure-grid">
+      <div class="governance-card fade-up">
+        
+        <h3>Board of Executives</h3>
+        <p>Seven founder members. Supreme governing body. Holds charge of the Initiative's assets, resources, and income.</p>
+      </div>
+      <div class="governance-card fade-up">
+        
+        <h3>Top Management & Planning</h3>
+        <p>Works jointly with the Board as the supreme decision-making body on all matters about the Initiative.</p>
+      </div>
+      <div class="governance-card fade-up">
+        
+        <h3>The Secretariat</h3>
+        <p>The Initiative's implementing arm, carrying out day-to-day work in the community.</p>
+      </div>
+      <div class="governance-card fade-up">
+        
+        <h3>Staff Recruitment Commission</h3>
+        <p>Oversees staffing, identifying gaps, advertising, receiving applications, and conducting interviews.</p>
+      </div>
+      <div class="governance-card fade-up">
+        
+        <h3>Board Meetings</h3>
+        <p>Board meets in ordinary session at least twice a year. Financial year runs from 1st January to 31st December.</p>
+      </div>
+      <div class="governance-card fade-up">
+        
+        <h3>Audit & Accountability</h3>
+        <p>Accounts subject to both internal audit and external audit nominated by the Top Management and Planning Committee and approved by the Board.</p>
+      </div>
+    </div>
+
+    <div class="team-section fade-up">
+      <h2>Our Team</h2>
+      <div class="team-grid">
+        <article class="team-card">
+          <div class="team-photo">OS</div>
+          <h3>Oduko Solomon</h3>
+          <p class="team-role">Chairperson</p>
+        </article>
+        <article class="team-card">
+          <div class="team-photo">AG</div>
+          <h3>Ayaro Gabriella</h3>
+          <p class="team-role">Administrator</p>
+        </article>
+        <article class="team-card">
+          <div class="team-photo">DD</div>
+          <h3>Desire Doreen</h3>
+          <p class="team-role">Vice Chairperson & M&E Officer</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section testimonials">
+  <div class="container">
+    <div class="section-head fade-up">
+      <h2>Voices from the Community</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="carousel">
+      <div class="testimonial-slide active">
+        <blockquote>"AIDI's constitution commits us to serve regardless of religion, tribe, colour, or race, and to work in partnership with communities rather than at a distance from them. Our approach begins with the community itself."</blockquote>
+        <cite>AIDI Founding Principle <span>Aojakitoi Parish, Kuju Subcounty</span></cite>
+      </div>
+      <div class="testimonial-slide">
+        <blockquote>"Infrastructure is not construction. It is access. A community that cannot reach a market cannot sell its harvest at a fair price; a community that cannot reach a road cannot reach a clinic."</blockquote>
+        <cite>AIDI Constitution <span>Article on Infrastructure</span></cite>
+      </div>
+      <div class="testimonial-slide">
+        <blockquote>"Support that compounds. Every shilling circulated through a structured local scheme keeps working, member after member, season after season."</blockquote>
+        <cite>AIDI Economic Vision <span>Savings & Lending Schemes</span></cite>
+      </div>
+      <div class="carousel-dots">
+        <button class="carousel-dot active" data-slide="0" aria-label="Slide 1"></button>
+        <button class="carousel-dot" data-slide="1" aria-label="Slide 2"></button>
+        <button class="carousel-dot" data-slide="2" aria-label="Slide 3"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section cta" id="donate">
+  <div class="container fade-up">
+    <h2>Work With Us</h2>
+    <p><strong>For our community:</strong> this is an invitation to organise, to learn, and to lead your own development efforts with AIDI alongside you.</p>
+    <p><strong>For donors and partners:</strong> your support helps establish member-run savings structures, deliver practical skills training, and equip community groups to access opportunities they have long been excluded from. It is support that compounds.</p>
+    <a class="btn" href="mailto:info@aidiuganda.com?subject=Donation%20information%20request">Request Donation Information</a>
+    <p style="margin-top:24px;font-size:0.9rem;opacity:0.9;">Email us for verified donation instructions. Please confirm payment details with AIDI before sending funds.</p>
+  </div>
+</section>
+
+</div>
+
+<div class="page" id="page-about">
+  <section class="section">
+    <div class="container">
+      <div class="section-head fade-up">
+        <h2>About AIDI Uganda</h2>
+        <div class="divider"></div>
+        <p>Born from the community, for the community.</p>
+      </div>
+
+      <div class="story-quote fade-up">
+        AIDI was born in 2026, in a room in Aojakitoi Parish, Kuju Subcounty, Amuria District, where a group of community promoters kept arriving at the same conclusion: the services that Teso depends on are stretched beyond their capacity. The providers exist, they simply cannot reach everyone who needs them.
+        <cite>So we decided to become part of the answer.</cite>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-img fade-up">
+          <img src="https://images.unsplash.com/photo-1594398901394-4e34939a4fd0?auto=format&fit=crop&w=800&q=80" alt="AIDI community work in Uganda">
+        </div>
+        <div class="about-text fade-up">
+          <h2>Who We Are</h2>
+          <p>AIDI is a local, not-for-profit community-based organisation (CBO) in Uganda. We are non-partisan and non-denominational, serving communities regardless of religion, tribe, colour, or race.</p>
+          <p>Our work is organised around five core objectives and guided by a simple belief: that development works best when it is <strong>locally led</strong>.</p>
+          <div class="values">
+            <div class="value-item"><div class="value-dot"></div><div><strong>Non-Partisan</strong><span>Beyond politics</span></div></div>
+            <div class="value-item"><div class="value-dot"></div><div><strong>Non-Denominational</strong><span>Beyond religion</span></div></div>
+            <div class="value-item"><div class="value-dot"></div><div><strong>Community-Rooted</strong><span>Local leadership</span></div></div>
+            <div class="value-item"><div class="value-dot"></div><div><strong>Transparent</strong><span>Audited & accountable</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="max-width:900px;margin:80px auto 0;" class="fade-up">
+        <h2 style="text-align:center;margin-bottom:24px;font-family:var(--font-display);text-transform:uppercase;font-size:2rem;color:var(--brand-forest);">Why We Were Founded</h2>
+        <p style="color:var(--text-muted);font-size:1.05rem;">AIDI emerged from a clear-eyed reading of the realities facing our communities. The experience of pandemics and disease, entrenched poverty, harmful cultural beliefs and practices, inadequate service delivery, poor infrastructure, weak agricultural practices, and limited advocacy skills have left many families in situations of extreme deprivation, vulnerability, and displacement. Famine, low skills, and high poverty have become familiar conditions rather than exceptions.</p>
+        <p style="color:var(--text-muted);font-size:1.05rem;">At the same time, the traditional support systems that communities once relied on (community farming support, poverty eradication strategies, capacity-building providers, and lobby and advocacy services) are overwhelmed. They can no longer keep pace with the scale of need. AIDI was constituted to help close that gap.</p>
+      </div>
+
+      <div class="mission-carousel">
+        <div class="mission-track">
+        <div class="mission-grid">
+          <div class="mission-card fade-up">
+            
+            <h3>Our Mission</h3>
+            <p>To mobilise communities for inclusive and collective action in the improvement of poor infrastructure, commercial agriculture enhancement, social inclusion, and improved livelihoods through community engagement and participatory development.</p>
+          </div>
+          <div class="mission-card fade-up">
+            
+            <h3>Our Vision</h3>
+            <p>To eradicate poverty in the community.</p>
+            <p style="margin-top:14px;">We work toward thriving communities where families can build secure livelihoods and shape their own development.</p>
+          </div>
+          <div class="mission-card fade-up">
+            
+            <h3>Our Goal</h3>
+            <p>To be a leading community-based initiative in promoting infrastructure, sustainable agriculture, climate resilience, poverty eradication, and community empowerment.</p>
+          </div>
+        </div>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head fade-up">
+        <h2>Our Story</h2>
+        <div class="divider"></div>
+        <p>From a room in Aojakitoi Parish to a growing community movement.</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item fade-up">
+          <div class="timeline-year">2026: The Beginning</div>
+          <h3>Founded in Aojakitoi Parish</h3>
+          <p>A group of community promoters came together around a shared conviction: the services Teso depends on are stretched beyond capacity. AIDI was constituted to help close that gap.</p>
+        </div>
+        <div class="timeline-item fade-up">
+          <div class="timeline-year">Today: Standing Alongside the Hard-to-Reach</div>
+          <h3>Working in Kuju Subcounty and across Teso</h3>
+          <p>Our approach begins with the community itself: identifying who is excluded, understanding why, and building the local structures that can carry services the last mile.</p>
+        </div>
+        <div class="timeline-item fade-up">
+          <div class="timeline-year">Tomorrow: Where We Are Going</div>
+          <h3>Growing Savings, Agriculture, and Protection</h3>
+          <p>We intend to grow our savings and lending scheme from a handful of members to a functioning community financial institution; expand our agricultural work from demonstration to scale; and build genuine protection capacity.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="page" id="page-where">
+  <section class="section">
+    <div class="container">
+      <div class="section-head fade-up">
+        <h2>Where We Work</h2>
+        <div class="divider"></div>
+        <p>Rooted in Teso, reaching the hard-to-reach.</p>
+      </div>
+      <div class="location-card fade-up">
+        <iframe
+          class="location-map"
+          title="Live Google Map showing the AIDI location in Awojaitoi, Amuria District"
+          src="https://www.google.com/maps?q=2.177503,33.553347&amp;z=15&amp;output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen>
+        </iframe>
+        <div>
+          <h3>Teso and Karamoja</h3>
+          <p>AIDI is rooted in Aojakitoi Parish, Kuju Subcounty, Amuria District, and works with communities in Teso and Karamoja. Our approach begins with the community itself: identifying who is excluded, understanding why, and building the local structures that can carry services the last mile.</p>
+          <a class="btn btn-primary" href="https://maps.app.goo.gl/Q9k5MGoZpjSfDt8W7" target="_blank" rel="noopener noreferrer">Open Pin in Google Maps</a>
+        </div>
+      </div>
+
+      <div style="max-width:900px;margin:80px auto 0;" class="fade-up">
+        <h2 style="text-align:center;margin-bottom:24px;font-family:var(--font-display);text-transform:uppercase;font-size:2rem;color:var(--brand-forest);">Our Reach</h2>
+        <p style="color:var(--text-muted);font-size:1.05rem;">AIDI works across two regions in eastern and north-eastern Uganda. Our headquarters is in Aojakitoi Parish, Kuju Subcounty, Amuria District — a location that positions us to reach communities in both Teso and Karamoja that are often beyond the reach of mainstream service delivery.</p>
+        <p style="color:var(--text-muted);font-size:1.05rem;">We cooperate with Government and Local Government Authorities in the districts where we work, on the condition that AIDI retains administrative control over its own funds, personnel, and assets.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="page" id="page-programs">
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head fade-up">
+        <h2>What We Do</h2>
+        <div class="divider"></div>
+        <p>AIDI's work is organised around five core objectives.</p>
+      </div>
+      <div class="filter-bar fade-up">
+        <button class="filter-btn active" data-filter="all">All Programs</button>
+        <button class="filter-btn" data-filter="education">Education</button>
+        <button class="filter-btn" data-filter="agriculture">Agriculture</button>
+        <button class="filter-btn" data-filter="support">Community Support</button>
+        <button class="filter-btn" data-filter="economic">Economic</button>
+        <button class="filter-btn" data-filter="partnership">Partnership</button>
+        <button class="filter-btn" data-filter="environment">Environmental Protection</button>
+      </div>
+      <div class="objectives-grid" id="programsGrid">
+        <div class="objective-card fade-up" data-category="education" onclick="openModal('education')">
+          <span class="objective-num">01</span>
+          
+          <h3>Education & Family Capacity</h3>
+          <p>We promote formal and informal educational activities that build families' skills, including adult literacy, vocational education, and support for school infrastructure.</p>
+        </div>
+        <div class="objective-card fade-up" data-category="agriculture" onclick="openModal('agriculture')">
+          <span class="objective-num">02</span>
+          
+          <h3>Climate-Resilient Agriculture</h3>
+          <p>We build awareness and practices around farming that withstand climate shocks and preserve the land for future generations.</p>
+        </div>
+        <div class="objective-card fade-up" data-category="support" onclick="openModal('support')">
+          <span class="objective-num">03</span>
+          
+          <h3>Wholesome Community Support</h3>
+          <p>We support society broadly through education and infrastructure development, human rights, psycho-social counselling, and community health promotion.</p>
+        </div>
+        <div class="objective-card fade-up" data-category="economic" onclick="openModal('economic')">
+          <span class="objective-num">04</span>
+          
+          <h3>Economic Programmes for Livelihoods</h3>
+          <p>Member-run savings and lending schemes, collective bargaining for inputs and produce, and enterprise skills that create income beyond subsistence farming.</p>
+        </div>
+        <div class="objective-card fade-up" data-category="partnership" onclick="openModal('partnership')">
+          <span class="objective-num">05</span>
+          
+          <h3>Partnership & Resource Mobilisation</h3>
+          <p>We partner with other actors and international donors to advance community development, reaching further as a registered group than individual efforts can alone.</p>
+        </div>
+        <div class="objective-card fade-up" data-category="environment" onclick="openModal('environment')">
+          <span class="objective-num">06</span>
+          
+          <h3>Environmental Protection</h3>
+          <p>We promote care for natural resources and practical actions that protect the land, water, and environment on which community livelihoods depend.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="page" id="page-governance">
+  <section class="section">
+    <div class="container">
+      <div class="section-head fade-up">
+        <h2>How We Are Governed</h2>
+        <div class="divider"></div>
+        <p>AIDI is governed by a Board of Executives of seven founder members, working jointly with a Top Management and Planning Committee. Day-to-day implementation is carried out by the Secretariat.</p>
+      </div>
+      <div class="governance-grid governance-structure-grid">
+        <div class="governance-card fade-up">
+          
+          <h3>Board of Executives</h3>
+          <p>Seven founder members. Supreme governing body. Holds charge of the Initiative's assets, resources, and income.</p>
+        </div>
+        <div class="governance-card fade-up">
+          
+          <h3>Top Management & Planning</h3>
+          <p>Works jointly with the Board as the supreme decision-making body on all matters about the Initiative.</p>
+        </div>
+        <div class="governance-card fade-up">
+          
+          <h3>The Secretariat</h3>
+          <p>The Initiative's implementing arm, carrying out day-to-day work in the community.</p>
+        </div>
+        <div class="governance-card fade-up">
+          
+          <h3>Staff Recruitment Commission</h3>
+          <p>Oversees staffing, identifying gaps, advertising, receiving applications, and conducting interviews.</p>
+        </div>
+        <div class="governance-card fade-up">
+          
+          <h3>Board Meetings</h3>
+          <p>Board meets in ordinary session at least twice a year. Financial year runs from 1st January to 31st December.</p>
+        </div>
+        <div class="governance-card fade-up">
+          
+          <h3>Audit & Accountability</h3>
+          <p>Accounts subject to both internal audit and external audit nominated by the Top Management and Planning Committee and approved by the Board.</p>
+        </div>
+      </div>
+
+      <div class="team-section fade-up">
+        <h2>Our Team</h2>
+        <div class="team-grid">
+          <article class="team-card">
+            <div class="team-photo">OS</div>
+            <h3>Oduko Solomon</h3>
+            <p class="team-role">Chairperson</p>
+          </article>
+          <article class="team-card">
+            <div class="team-photo">AG</div>
+            <h3>Ayaro Gabriella</h3>
+            <p class="team-role">Administrator</p>
+          </article>
+          <article class="team-card">
+            <div class="team-photo">DD</div>
+            <h3>Desire Doreen</h3>
+            <p class="team-role">Vice Chairperson & M&E Officer</p>
+          </article>
+        </div>
+      </div>
+
+      <div style="max-width:900px;margin:80px auto 0;" class="fade-up">
+        <h2 style="text-align:center;margin-bottom:24px;font-family:var(--font-display);text-transform:uppercase;font-size:2rem;color:var(--brand-forest);">Our Standing</h2>
+        <p style="color:var(--text-muted);font-size:1.05rem;">AIDI is a local, not-for-profit community-based organisation (CBO). We maintain our independence from public authorities and uphold the fundamental rights of the people.</p>
+        <p style="color:var(--text-muted);font-size:1.05rem;">We cooperate with Government and Local Government Authorities in the districts where we work, on the condition that AIDI retains administrative control over its own funds, personnel, and assets.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="page" id="page-stories">
+  <section class="section testimonials">
+    <div class="container">
+      <div class="section-head fade-up">
+        <h2>Voices from the Community</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="carousel">
+        <div class="testimonial-slide active">
+          <blockquote>"AIDI's constitution commits us to serve regardless of religion, tribe, colour, or race, and to work in partnership with communities rather than at a distance from them. Our approach begins with the community itself."</blockquote>
+          <cite>AIDI Founding Principle <span>Aojakitoi Parish, Kuju Subcounty</span></cite>
+        </div>
+        <div class="testimonial-slide">
+          <blockquote>"Infrastructure is not construction. It is access. A community that cannot reach a market cannot sell its harvest at a fair price; a community that cannot reach a road cannot reach a clinic."</blockquote>
+          <cite>AIDI Constitution <span>Article on Infrastructure</span></cite>
+        </div>
+        <div class="testimonial-slide">
+          <blockquote>"Support that compounds. Every shilling circulated through a structured local scheme keeps working, member after member, season after season."</blockquote>
+          <cite>AIDI Economic Vision <span>Savings & Lending Schemes</span></cite>
+        </div>
+        <div class="carousel-dots">
+          <button class="carousel-dot active" data-slide="0" aria-label="Slide 1"></button>
+          <button class="carousel-dot" data-slide="1" aria-label="Slide 2"></button>
+          <button class="carousel-dot" data-slide="2" aria-label="Slide 3"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="page" id="page-contact">
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head fade-up">
+        <h2>Contact Us</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card fade-up">
+          
+          <h3>Visit Us</h3>
+          <p>Aojakitoi Parish<br>Kuju Subcounty, Amuria District<br>Uganda</p>
+        </div>
+        <div class="contact-card fade-up">
+          
+          <h3>Email Us</h3>
+          <p><a href="mailto:info@aidiuganda.com">info@aidiuganda.com</a></p>
+        </div>
+        <div class="contact-card fade-up">
+          
+          <h3>Call Us</h3>
+          <p><a href="tel:+256781299280">+256 781 299 280</a></p>
+        </div>
+      </div>
+      <form class="contact-form fade-up" onsubmit="submitForm(event)">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" required placeholder="e.g. John Okello">
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" required placeholder="you@example.com">
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" required placeholder="How can we help you?"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Send Message</button>
+        <div class="form-notice" id="formSuccess" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+</div>
+
+<div class="page" id="page-donate">
+  <section class="section cta">
+    <div class="container fade-up">
+      <h2>Work With Us</h2>
+      <p><strong>For our community:</strong> this is an invitation to organise, to learn, and to lead your own development efforts with AIDI alongside you.</p>
+      <p><strong>For donors and partners:</strong> your support helps establish member-run savings structures, deliver practical skills training, and equip community groups to access opportunities they have long been excluded from. It is support that compounds.</p>
+      <a class="btn" href="mailto:info@aidiuganda.com?subject=Donation%20information%20request">Request Donation Information</a>
+      <p style="margin-top:24px;font-size:0.9rem;opacity:0.9;">Email us for verified donation instructions. Please confirm payment details with AIDI before sending funds.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head fade-up">
+        <h2>Ways to Give</h2>
+        <div class="divider"></div>
+        <p>Every contribution compounds. Here is how your support is used.</p>
+      </div>
+      <div class="governance-grid">
+        <div class="governance-card fade-up">
+          
+          <h3>Savings & Lending Schemes</h3>
+          <p>Help us establish member-run savings structures that keep capital circulating locally, member after member, season after season.</p>
+        </div>
+        <div class="governance-card fade-up">
+          
+          <h3>Agricultural Training</h3>
+          <p>Fund demonstration plots and practical training in climate-resilient farming that withstands shocks and preserves land for future generations.</p>
+        </div>
+        <div class="governance-card fade-up">
+          
+          <h3>Education & Skills</h3>
+          <p>Support adult literacy, vocational education, and school infrastructure — building the capacity of families to shape their own development.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head fade-up">
+        <h2>What Your Support Enables</h2>
+        <div class="divider"></div>
+        <p>Practical, community-led outcomes — not promises.</p>
+      </div>
+      <div class="objectives-grid">
+        <div class="objective-card fade-up">
+          <span class="objective-num">01</span>
+          
+          <h3>Establish Member-Run Savings</h3>
+          <p>Your gift seeds the capital pools that let community groups lend to one another, smoothing seasonal income and funding small enterprise — money that stays in the community and compounds.</p>
+        </div>
+        <div class="objective-card fade-up">
+          <span class="objective-num">02</span>
+          
+          <h3>Deliver Practical Skills Training</h3>
+          <p>Fund vocational training, adult literacy, and enterprise skills sessions that give families the tools to earn beyond subsistence farming and build household resilience.</p>
+        </div>
+        <div class="objective-card fade-up">
+          <span class="objective-num">03</span>
+          
+          <h3>Equip Community Groups</h3>
+          <p>Help us register, train, and connect community groups so they can access the government programmes, markets, and partnerships they have long been excluded from.</p>
+        </div>
+        <div class="objective-card fade-up">
+          <span class="objective-num">04</span>
+          
+          <h3>Scale Climate-Smart Agriculture</h3>
+          <p>Support demonstration plots, drought-resistant seed, and practical training that help farmers weather climate shocks and preserve land for the next generation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head fade-up">
+        <h2>How to Give</h2>
+        <div class="divider"></div>
+        <p>We accept support in several forms. All contributions are acknowledged and reported on.</p>
+      </div>
+      <div class="governance-grid">
+        <div class="governance-card fade-up">
+          
+          <h3>Email Us to Give</h3>
+          <p>Write to <a href="mailto:info@aidiuganda.com?subject=Donation%20information%20request">info@aidiuganda.com</a> and we will send verified donation instructions. Always confirm payment details with AIDI before sending funds.</p>
+        </div>
+        <div class="governance-card fade-up">
+          
+          <h3>Speak With Us</h3>
+          <p>Call <a href="tel:+256781299280">+256 781 299 280</a> to discuss a gift, a partnership, or a recurring contribution. We are happy to walk you through the options.</p>
+        </div>
+        <div class="governance-card fade-up">
+          
+          <h3>Partner or Volunteer</h3>
+          <p>Beyond funding, we welcome partners, volunteers, and technical support. Visit our <a href="#contact" data-nav="contact">Contact page</a> to start the conversation.</p>
+        </div>
+      </div>
+
+      <div style="max-width:820px;margin:64px auto 0;" class="fade-up">
+        <p style="color:var(--text-muted);font-size:0.95rem;text-align:center;line-height:1.7;">AIDI is a local, not-for-profit community-based organisation. Accounts are subject to internal and external audit. Every contribution is reported on and accounted for. If you would like to see our annual reports or financial statements before giving, please write to us and we will share them.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<section class="newsletter">
+  <div class="container fade-up">
+    <h2>Stay Connected</h2>
+    <p>Sign up to receive updates on our programmes, impact stories, and ways to get involved.</p>
+    <form class="newsletter-form" onsubmit="subscribe(event)">
+      <input type="email" name="email" placeholder="Enter your email" autocomplete="email" required>
+      <input type="text" name="website" class="newsletter-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button type="submit">Subscribe</button>
+    </form>
+    <p class="newsletter-consent">By subscribing, you agree to receive occasional email updates from AIDI. You can ask us to remove your address at any time.</p>
+    <p style="margin-top:16px;font-size:0.85rem;opacity:0.9;" id="newsletterMsg" role="status" aria-live="polite"></p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="#home" data-nav="home" class="logo footer-brand" aria-label="AIDI Uganda home">
+          <span class="logo-mark">A</span>
+          <span class="logo-text">
+            <strong style="color:#fff;">AIDI UGANDA</strong>
+            <span style="color:#B5A99A;">Aojakitoi Integrated Development Initiative</span>
+          </span>
+        </a>
+        <p style="margin-top:16px;font-size:0.9rem;">AIDI is a local, not-for-profit community-based organisation (CBO), registered in Aojakitoi Parish, Kuju Subcounty, Amuria District in 2026. We mobilise communities across Teso and Karamoja for inclusive, collective action.</p>
+        <div class="social">
+          <a href="#" title="Facebook" aria-label="Facebook">Facebook</a>
+          <a href="#" title="Twitter" aria-label="Twitter">Twitter</a>
+          <a href="#" title="Instagram" aria-label="Instagram">Instagram</a>
+          <a href="#" title="LinkedIn" aria-label="LinkedIn">LinkedIn</a>
+          <a href="#" title="YouTube" aria-label="YouTube">YouTube</a>
+        </div>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#about" data-nav="about">About Us</a></li>
+          <li><a href="#programs" data-nav="programs">What We Do</a></li>
+          <li><a href="#where" data-nav="where">Where We Work</a></li>
+          <li><a href="#governance" data-nav="governance">Governance</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get Involved</h4>
+        <ul>
+          <li><a href="#donate" data-nav="donate">Donate</a></li>
+          <li><a href="#contact" data-nav="contact">Partner With Us</a></li>
+          <li><a href="#contact" data-nav="contact">Volunteer</a></li>
+          <li><a href="#contact" data-nav="contact">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Annual Reports</a></li>
+          <li><a href="#">Financial Statements</a></li>
+          <li><a href="#">Constitution</a></li>
+          <li><a href="#contact" data-nav="contact">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Aojakitoi Integrated Development Initiative (AIDI) Uganda. All rights reserved. | Community-Based Organisation (CBO) · Local Not-for-Profit · Non-Partisan · Non-Denominational | Amuria District, Uganda</div>
+      <div class="footer-tagline">"We don't just serve communities. We grow with them."</div>
+    </div>
+  </div>
+</footer>
+
+<a href="#donate" data-nav="donate" class="float-donate">Donate</a>
+
+<div class="modal-overlay" id="modal" onclick="if(event.target===this) closeModal()">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">Close</button>
+    
+    <h3 id="modalTitle"></h3>
+    <p id="modalDesc"></p>
+    <ul id="modalList"></ul>
+    <a href="#donate" data-nav="donate" class="btn btn-primary" style="width:100%;justify-content:center;" onclick="closeModal()">Support This Program</a>
+  </div>
+</div>
+
+<script>
+const MODAL_DATA = {
+  education: {
+    title: 'Education & Family Capacity',
+    desc: 'We promote formal and informal educational activities that build families\' skills, so that every household can participate fully in community life and shape its own development.',
+    list: [
+      'Promote formal and informal educational activities for children and adults',
+      'Adult literacy and numeracy programmes',
+      'Vocational education and practical skills training',
+      'Support for school infrastructure and access to education',
+      'Family capacity building through mentorship and peer learning',
+      'Encourage parents and guardians to support children\'s learning at home'
+    ]
+  },
+  agriculture: {
+    title: 'Climate-Resilient Agriculture',
+    desc: 'We build awareness and practices around farming that withstand climate shocks and preserve the land for future generations.',
+    list: [
+      'Raise awareness of climate-smart and climate-resilient farming practices',
+      'Demonstration plots for drought-resistant seed varieties and inputs',
+      'Soil and water conservation techniques',
+      'Training in sustainable land management',
+      'Collective marketing and post-harvest storage solutions',
+      'Encourage crop diversification to reduce climate risk'
+    ]
+  },
+  support: {
+    title: 'Wholesome Community Support',
+    desc: 'We support society broadly through education and infrastructure development, human rights, psycho-social counselling, and community health promotion.',
+    list: [
+      'Support community education and infrastructure development',
+      'Human rights awareness and advocacy',
+      'Psycho-social counselling and support for vulnerable groups',
+      'Community health promotion and disease prevention',
+      'Support for orphans, widows, and people with disabilities',
+      'Promote social inclusion across all groups in the community'
+    ]
+  },
+  economic: {
+    title: 'Economic Programmes for Livelihoods',
+    desc: 'Member-run savings and lending schemes, collective bargaining for inputs and produce, and enterprise skills that create income beyond subsistence farming.',
+    list: [
+      'Establish and grow member-run savings and lending schemes',
+      'Collective bargaining for agricultural inputs and produce',
+      'Enterprise and business skills training for small traders',
+      'Support for income-generating activities beyond subsistence farming',
+      'Financial literacy and household budgeting training',
+      'Link community groups to markets and value chains'
+    ]
+  },
+  partnership: {
+    title: 'Partnership & Resource Mobilisation',
+    desc: 'We partner with other actors and international donors to advance community development, reaching further as a registered group than individual efforts can alone.',
+    list: [
+      'Build strategic partnerships with development actors and NGOs',
+      'Grant writing and resource mobilisation for community projects',
+      'Coordinate with Local Government Authorities in Teso and Karamoja',
+      'Joint programming and shared learning with peer organisations',
+      'Engage international donors and philanthropic partners',
+      'Strengthen the Initiative\'s capacity to attract and manage resources'
+    ]
+  },
+  environment: {
+    title: 'Environmental Protection',
+    desc: 'We promote care for natural resources and practical actions that protect the land, water, and environment on which community livelihoods depend.',
+    list: [
+      'Tree planting and community reforestation',
+      'Wetland and water source protection',
+      'Sustainable land management practices',
+      'Environmental awareness and education in schools and villages',
+      'Promote alternatives to destructive environmental practices',
+      'Encourage community-led natural resource management'
+    ]
+  }
+};
+
+function openModal(key) {
+  const data = MODAL_DATA[key];
+  if (!data) return;
+  document.getElementById('modalTitle').textContent = data.title;
+  document.getElementById('modalDesc').textContent = data.desc;
+  document.getElementById('modalList').innerHTML = data.list.map(item => `<li>${item}</li>`).join('');
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+const PAGES = ['home','about','where','programs','governance','stories','contact','donate'];
+function navigate(page) {
+  if (!PAGES.includes(page)) page = 'home';
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + page);
+  if (target) target.classList.add('active');
+  document.querySelectorAll('nav a[data-nav]').forEach(a => {
+    a.classList.toggle('active', a.dataset.nav === page);
+  });
+  document.getElementById('navList').classList.remove('open');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  setTimeout(initFadeUps, 80);
+}
+document.addEventListener('click', e => {
+  const link = e.target.closest('[data-nav]');
+  if (link) {
+    e.preventDefault();
+    const page = link.dataset.nav;
+    navigate(page);
+  }
+});
+
+document.getElementById('menuToggle').addEventListener('click', () => {
+  document.getElementById('navList').classList.toggle('open');
+});
+
+const themeBtn = document.getElementById('themeToggle');
+const savedTheme = localStorage.getItem('aidi-theme') || 'light';
+document.body.dataset.theme = savedTheme;
+const updateThemeToggle = () => {
+  const isDark = document.body.dataset.theme === 'dark';
+  themeBtn.querySelector('.theme-label').textContent = isDark ? 'Light mode' : 'Dark mode';
+  themeBtn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+};
+updateThemeToggle();
+themeBtn.addEventListener('click', () => {
+  const next = document.body.dataset.theme === 'light' ? 'dark' : 'light';
+  document.body.dataset.theme = next;
+  localStorage.setItem('aidi-theme', next);
+  updateThemeToggle();
+});
+
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+  document.getElementById('progress').style.width = pct + '%';
+});
+
+function updateClock() {
+  const el = document.getElementById('clock');
+  if (!el) return;
+  const now = new Date();
+  const eat = new Date(now.getTime() + (now.getTimezoneOffset() + 180) * 60000);
+  const hh = String(eat.getHours()).padStart(2, '0');
+  const mm = String(eat.getMinutes()).padStart(2, '0');
+  el.textContent = `${hh}:${mm}`;
+}
+updateClock();
+setInterval(updateClock, 30000);
+
+(function heroSlideshow() {
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dot');
+  if (!slides.length) return;
+  let current = 0;
+  let timer;
+  function show(i) {
+    slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+    dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+    current = i;
+  }
+  function next() { show((current + 1) % slides.length); }
+  function start() { timer = setInterval(next, 5500); }
+  function stop() { clearInterval(timer); }
+  dots.forEach((d, i) => d.addEventListener('click', () => { stop(); show(i); start(); }));
+  start();
+})();
+
+(function testimonialCarousel() {
+  const carousels = document.querySelectorAll('.carousel');
+  carousels.forEach(carousel => {
+    const slides = carousel.querySelectorAll('.testimonial-slide');
+    const dots = carousel.querySelectorAll('.carousel-dot');
+    if (!slides.length) return;
+    let current = 0;
+    let timer;
+    function show(i) {
+      slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+      dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+      current = i;
+    }
+    function next() { show((current + 1) % slides.length); }
+    function start() { timer = setInterval(next, 7000); }
+    function stop() { clearInterval(timer); }
+    dots.forEach((d, i) => d.addEventListener('click', () => { stop(); show(i); start(); }));
+    start();
+  });
+})();
+
+document.querySelectorAll('.stat-item').forEach(item => {
+  const track = item.closest('.stats-track');
+  item.addEventListener('click', () => {
+    const pressed = item.getAttribute('aria-pressed') === 'true';
+    item.setAttribute('aria-pressed', pressed ? 'false' : 'true');
+    track?.classList.toggle('is-held', Boolean(track.querySelector('.stat-item[aria-pressed="true"]')));
+  });
+  item.addEventListener('focus', () => track?.classList.add('is-held'));
+  item.addEventListener('blur', () => {
+    if (!track?.querySelector('.stat-item[aria-pressed="true"]')) track?.classList.remove('is-held');
+  });
+});
+
+function animateCount(el) {
+  const target = parseInt(el.dataset.count, 10);
+  if (isNaN(target)) return;
+  const duration = 1600;
+  const start = performance.now();
+  function step(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    const val = Math.floor(target * eased);
+    el.textContent = val;
+    if (p < 1) requestAnimationFrame(step);
+    else el.textContent = target;
+  }
+  requestAnimationFrame(step);
+}
+
+function initFadeUps() {
+  const els = document.querySelectorAll('.page.active .fade-up, .newsletter .fade-up, .stats .fade-up');
+  els.forEach(el => {
+    if (el.dataset.observed) return;
+    el.dataset.observed = '1';
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          const counter = entry.target.querySelector('.stat-num');
+          if (counter && !counter.dataset.counted) {
+            counter.dataset.counted = '1';
+            animateCount(counter);
+          }
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    obs.observe(el);
+  });
+}
+initFadeUps();
+const statsTrack = document.querySelector('.stats-track');
+const statsGrid = statsTrack?.querySelector('.stats-grid');
+if (statsTrack && statsGrid) {
+  const clone = statsGrid.cloneNode(true);
+  clone.setAttribute('aria-hidden', 'true');
+  clone.inert = true;
+  clone.querySelectorAll('.fade-up, .fade-left, .fade-right').forEach(card => {
+    card.classList.remove('fade-up', 'fade-left', 'fade-right', 'visible');
+  });
+  clone.querySelectorAll('[data-count]').forEach(counter => {
+    counter.textContent = Number(counter.dataset.count).toLocaleString();
+    counter.removeAttribute('data-count');
+  });
+  statsTrack.appendChild(clone);
+}
+document.querySelectorAll('.mission-track').forEach(track => {
+  const cards = track.querySelector('.mission-grid');
+  if (!cards) return;
+  const clone = cards.cloneNode(true);
+  clone.setAttribute('aria-hidden', 'true');
+  clone.inert = true;
+  clone.querySelectorAll('.fade-up, .fade-left, .fade-right').forEach(card => {
+    card.classList.remove('fade-up', 'fade-left', 'fade-right', 'visible');
+  });
+  track.appendChild(clone);
+});
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('#programsGrid .objective-card').forEach(card => {
+      const show = filter === 'all' || card.dataset.category === filter;
+      card.style.display = show ? '' : 'none';
+    });
+  });
+});
+
+function submitForm(e) {
+  e.preventDefault();
+  const notice = document.getElementById('formSuccess');
+  notice.textContent = 'Thank you. Your message has been received. We will respond shortly.';
+  notice.style.color = 'var(--primary)';
+  e.target.reset();
+  setTimeout(() => { notice.textContent = ''; }, 6000);
+}
+
+function subscribe(e) {
+  e.preventDefault();
+  const form = e.target;
+  const honeypot = form.querySelector('.newsletter-honeypot');
+  const msg = document.getElementById('newsletterMsg');
+  if (honeypot && honeypot.value) return;
+  msg.textContent = 'Thank you for subscribing. We will be in touch.';
+  msg.style.color = 'var(--brand-ochre-light)';
+  form.reset();
+  setTimeout(() => { msg.textContent = ''; }, 6000);
+}
+
+(function initRoute() {
+  const hash = window.location.hash.replace('#', '');
+  if (hash && PAGES.includes(hash)) {
+    navigate(hash);
+  } else {
+    navigate('home');
+  }
+})();
+window.addEventListener('hashchange', () => {
+  const hash = window.location.hash.replace('#', '');
+  if (hash && PAGES.includes(hash)) navigate(hash);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>AIDI Admin</title>
+  <link rel="icon" type="image/png" href="assets/aidi-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="assets/admin.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="assets/supabase-config.js" defer></script>
+  <script src="assets/cms-client.js" defer></script>
+  <script src="assets/admin.js" defer></script>
+</head>
+<body class="admin-page" data-theme="light">
+  <header class="admin-header">
+    <a class="admin-brand" href="index.html">
+      <img class="logo-image" src="assets/aidi-logo.png" alt="AIDI Uganda">
+      <span>Website Admin</span>
+    </a>
+    <a class="admin-public-link" href="index.html">View website</a>
+  </header>
+  <main class="admin-main">
+    <section class="admin-login" id="adminLogin">
+      <p class="admin-kicker">AIDI Uganda</p>
+      <h1>Admin sign in</h1>
+      <p>Sign in with an administrator account to manage website content and enquiries.</p>
+      <form id="loginForm">
+        <label for="loginEmail">Email address</label>
+        <input id="loginEmail" name="email" type="email" autocomplete="username" required>
+        <label for="loginPassword">Password</label>
+        <input id="loginPassword" name="password" type="password" autocomplete="current-password" required>
+        <button class="admin-button admin-button-primary" type="submit">Sign in</button>
+      </form>
+      <button class="admin-text-button" id="resetPassword" type="button">Send password reset email</button>
+      <button class="admin-button admin-button-secondary" id="previewDashboard" type="button" style="width:100%; margin-top:16px;">Preview dashboard</button>
+      <p class="admin-status" id="loginStatus" role="status" aria-live="polite"></p>
+      <p class="admin-help" id="configurationHelp" hidden>Connect this site to Supabase and complete the one-time admin setup in <code>SUPABASE_SETUP.md</code>.</p>
+    </section>
+
+    <section class="admin-dashboard" id="adminDashboard" hidden>
+      <div class="admin-dashboard-heading">
+        <div>
+          <p class="admin-kicker">Content management</p>
+          <h1>AIDI Website Admin</h1>
+          <p id="signedInAs"></p>
+        </div>
+        <button class="admin-button admin-button-secondary" id="signOut" type="button">Sign out</button>
+      </div>
+      <nav class="admin-tabs" aria-label="Admin sections">
+        <button type="button" class="admin-tab active" data-panel="contentPanel" aria-selected="true">Pages &amp; photos</button>
+        <button type="button" class="admin-tab" data-panel="storiesPanel" aria-selected="false">Stories</button>
+        <button type="button" class="admin-tab" data-panel="messagesPanel" aria-selected="false">Messages <span id="messageCount"></span></button>
+        <button type="button" class="admin-tab" data-panel="donationsPanel" aria-selected="false">Donation requests <span id="donationCount"></span></button>
+      </nav>
+      <p class="admin-status dashboard-status" id="dashboardStatus" role="status" aria-live="polite"></p>
+
+      <section class="admin-panel" id="contentPanel">
+        <div class="admin-panel-heading">
+          <div>
+            <h2>Website content and photos</h2>
+            <p>Edit text, replace images, and save changes directly to the live website.</p>
+          </div>
+          <label class="admin-filter-label" for="contentPageFilter">Page</label>
+          <select id="contentPageFilter"></select>
+        </div>
+        <div class="admin-content-list" id="contentList" aria-live="polite"></div>
+      </section>
+
+      <section class="admin-panel" id="storiesPanel" hidden>
+        <div class="admin-panel-heading">
+          <div>
+            <h2>Community stories</h2>
+            <p>Create drafts, publish stories, update them, or remove them from the website.</p>
+          </div>
+        </div>
+        <form class="admin-story-form" id="storyForm">
+          <input id="storyId" type="hidden">
+          <label for="storyTitle">Story title</label>
+          <input id="storyTitle" maxlength="180" required>
+          <label for="storyExcerpt">Short introduction</label>
+          <textarea id="storyExcerpt" maxlength="600" rows="2" required></textarea>
+          <label for="storyBody">Story</label>
+          <textarea id="storyBody" maxlength="12000" rows="7" required></textarea>
+          <label for="storyImage">Story photo (optional)</label>
+          <input id="storyImage" type="file" accept="image/jpeg,image/png,image/webp,image/gif">
+          <img class="admin-story-preview" id="storyImagePreview" alt="Selected story photo preview" hidden>
+          <input id="storyExistingImage" type="hidden">
+          <label class="admin-checkbox"><input id="storyPublished" type="checkbox"> Publish this story on the website</label>
+          <div class="admin-form-actions">
+            <button class="admin-button admin-button-primary" type="submit" id="saveStory">Save story</button>
+            <button class="admin-button admin-button-secondary" type="button" id="cancelStoryEdit" hidden>Cancel edit</button>
+          </div>
+        </form>
+        <div class="admin-story-list" id="storyList"></div>
+      </section>
+
+      <section class="admin-panel" id="messagesPanel" hidden>
+        <div class="admin-panel-heading">
+          <div>
+            <h2>Contact messages</h2>
+            <p>Read, archive, and delete messages sent through the website.</p>
+          </div>
+        </div>
+        <div class="admin-inbox-list" id="messageList"></div>
+      </section>
+
+      <section class="admin-panel" id="donationsPanel" hidden>
+        <div class="admin-panel-heading">
+          <div>
+            <h2>Donation information requests</h2>
+            <p>Review enquiries, mark them as read or archived, and delete them when no longer needed.</p>
+          </div>
+        </div>
+        <div class="admin-inbox-list" id="donationList"></div>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
