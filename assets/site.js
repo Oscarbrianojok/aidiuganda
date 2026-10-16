@@ -207,21 +207,42 @@ if (statCounters.length) {
   }
 }
 
-// SCROLL REVEAL + COUNTERS
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
+// Gently move content into place the first time it enters the viewport.
+const revealElements = document.querySelectorAll([
+  '.fade-up', '.fade-left', '.fade-right',
+  '.section-head h1', '.section-head h2', '.section-head .divider', '.work-with-us-heading h1', '.work-with-us-heading h2',
+  '.team-section > h2', '.mission-vision-goal > h2',
+  '.story-quote', '.value-item', '.objective-card', '.governance-card',
+  '.team-section', '.team-card', '.timeline-item', '.work-option',
+  '.donation-request-panel', '.contact-card', '.contact-form',
+  '.cms-story-card', '.location-card', '.card', '.mvg-panel'
+].join(','));
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (reducedMotion || !('IntersectionObserver' in window)) {
+  revealElements.forEach(element => element.classList.add('visible'));
+} else {
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
       entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
+      revealObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -4% 0px' });
+  const siblingCounts = new Map();
+  revealElements.forEach(element => {
+    const index = siblingCounts.get(element.parentElement) || 0;
+    siblingCounts.set(element.parentElement, index + 1);
+    element.style.setProperty('--motion-delay', `${(index % 5) * 65}ms`);
+    if (element.matches('.section-head h1, .section-head h2, .work-with-us-heading h1, .work-with-us-heading h2, .team-section > h2, .mission-vision-goal > h2')) {
+      element.classList.add('title-reveal');
+    } else if (element.matches('.section-head .divider')) {
+      element.classList.add('divider-reveal');
+    } else if (!element.matches('.fade-up, .fade-left, .fade-right')) {
+      element.classList.add('motion-reveal');
     }
+    revealObserver.observe(element);
   });
-}, { threshold: 0.15 });
-document.querySelectorAll('.fade-up, .fade-left, .fade-right').forEach(el => observer.observe(el));
-document.querySelectorAll('.objective-card, .governance-card, .team-card, .timeline-item, .work-option, .donation-request-panel, .contact-card, .cms-story-card, .location-card, .card').forEach((el, index) => {
-  el.classList.add('motion-reveal');
-  el.style.setProperty('--motion-delay', `${(index % 4) * 70}ms`);
-  observer.observe(el);
-});
+}
 
 // FILTER
 const objectiveTitles = document.querySelectorAll('.objective-title');
