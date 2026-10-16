@@ -18,6 +18,7 @@
   const loginStatus = $('#loginStatus');
   const dashboardStatus = $('#dashboardStatus');
   let currentUser = null;
+  let previewMode = false;
   let allFields = [];
   let siteValues = new Map();
   let storyImageUrl = '';
@@ -30,8 +31,10 @@
 
   function showDashboard(user) {
     currentUser = user;
+    previewMode = false;
     loginSection.hidden = true;
     dashboard.hidden = false;
+    $('#signOut').textContent = 'Sign out';
     $('#signedInAs').textContent = user.email || 'Preview dashboard';
     loadContentEditor().catch(error => setStatus(dashboardStatus, error.message, true));
   }
@@ -40,16 +43,87 @@
     currentUser = null;
     dashboard.hidden = true;
     loginSection.hidden = false;
+    $('#signOut').textContent = 'Sign out';
   }
 
   function previewDashboard() {
     const previewUser = { email: 'preview@aidiuganda.local', id: 'preview-admin' };
+    previewMode = true;
     loginSection.hidden = true;
     dashboard.hidden = false;
     $('#signedInAs').textContent = previewUser.email;
+    $('#signOut').textContent = 'Back to sign in';
     currentUser = previewUser;
     setStatus(dashboardStatus, 'Preview mode: this dashboard is not connected to a live Supabase admin session yet.');
-    loadContentEditor().catch(error => setStatus(dashboardStatus, error.message, true));
+    renderPreviewContent();
+    renderPreviewList('storyList', [
+      ['Community story example', 'A sample story showing how published community updates will appear here.', 'Sample story content; real stories appear after Supabase is connected.', 'Sample only · Published']
+    ]);
+    renderPreviewList('messageList', [
+      ['Sample contact message', 'visitor@example.org', 'This is example content only; real messages appear after Supabase is connected.', 'Sample only · New']
+    ]);
+    renderPreviewList('donationList', [
+      ['Sample donation request', 'donor@example.org', 'This is example content only; real requests appear after Supabase is connected.', 'Sample only · New']
+    ]);
+    $('#messageCount').textContent = '1';
+    $('#donationCount').textContent = '1';
+  }
+
+  function renderPreviewContent() {
+    const filter = $('#contentPageFilter');
+    filter.replaceChildren();
+    for (const [value, label] of [['all', 'All pages'], ['index.html', 'Home']]) {
+      const option = document.createElement('option');
+      option.value = value;
+      option.textContent = label;
+      filter.appendChild(option);
+    }
+    filter.disabled = true;
+    const host = $('#contentList');
+    host.replaceChildren();
+    for (const [title, value] of [
+      ['Home — Main heading', 'Empowering Communities, Growing Futures'],
+      ['Home — Introductory text', 'AIDI Uganda is a community-rooted initiative.']
+    ]) {
+      const card = document.createElement('article');
+      card.className = 'admin-content-card';
+      const editor = document.createElement('div');
+      const label = document.createElement('label');
+      label.textContent = title;
+      const input = document.createElement('textarea');
+      input.value = value;
+      input.disabled = true;
+      const help = document.createElement('small');
+      help.textContent = 'Sample preview only — connect Supabase to edit live website content.';
+      editor.append(label, help, input);
+      const save = document.createElement('button');
+      save.className = 'admin-button admin-button-primary';
+      save.type = 'button';
+      save.textContent = 'Save';
+      save.disabled = true;
+      card.append(editor, save);
+      host.appendChild(card);
+    }
+    $('#storyForm').querySelectorAll('input, textarea, button').forEach(control => { control.disabled = true; });
+  }
+
+  function renderPreviewList(hostId, entries) {
+    const host = document.getElementById(hostId);
+    host.replaceChildren();
+    for (const [titleText, detailText, bodyText, statusText] of entries) {
+      const card = document.createElement('article');
+      card.className = hostId === 'storyList' ? 'admin-story-item' : 'admin-inbox-card';
+      const title = document.createElement('h3');
+      title.textContent = titleText;
+      const detail = document.createElement('p');
+      detail.textContent = detailText;
+      const body = document.createElement('p');
+      body.textContent = bodyText;
+      const status = document.createElement('small');
+      status.textContent = statusText;
+      card.append(title, detail, body, status);
+      host.appendChild(card);
+    }
   }
 
   async function verifyAdmin(user) {
@@ -484,6 +558,7 @@
     document.querySelectorAll('.admin-panel').forEach(panel => {
       panel.hidden = panel.id !== panelId;
     });
+    if (previewMode) return;
     if (panelId === 'storiesPanel') await loadStories();
     if (panelId === 'messagesPanel') await loadInbox('contact_messages', 'messageList', 'messageCount');
     if (panelId === 'donationsPanel') await loadInbox('donation_requests', 'donationList', 'donationCount');
@@ -497,6 +572,22 @@
         previewDashboard();
       });
     }
+    $('#signOut').addEventListener('click', async () => {
+      if (previewMode) {
+        previewMode = false;
+        $('#contentPageFilter').disabled = false;
+        $('#storyForm').querySelectorAll('input, textarea, button').forEach(control => { control.disabled = false; });
+        showLogin();
+        return;
+      }
+      const { error } = await cms.client.auth.signOut();
+      if (error) setStatus(dashboardStatus, `Could not sign out: ${error.message}`, true);
+      else showLogin();
+    });
+    document.querySelectorAll('.admin-tab').forEach(tab => {
+      tab.addEventListener('click', () => activatePanel(tab.dataset.panel)
+        .catch(error => setStatus(dashboardStatus, error.message, true)));
+    });
 
     if (!cms?.configured || !cms.client) {
       $('#configurationHelp').hidden = false;
@@ -533,15 +624,6 @@
       setStatus(loginStatus, error ? error.message : 'Password reset email sent.', Boolean(error));
     });
 
-    $('#signOut').addEventListener('click', async () => {
-      const { error } = await cms.client.auth.signOut();
-      if (error) setStatus(dashboardStatus, `Could not sign out: ${error.message}`, true);
-      else showLogin();
-    });
-    document.querySelectorAll('.admin-tab').forEach(tab => {
-      tab.addEventListener('click', () => activatePanel(tab.dataset.panel)
-        .catch(error => setStatus(dashboardStatus, error.message, true)));
-    });
     $('#storyForm').addEventListener('submit', saveStory);
     $('#cancelStoryEdit').addEventListener('click', resetStoryForm);
     $('#storyImage').addEventListener('change', event => {

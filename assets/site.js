@@ -212,10 +212,16 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
     }
   });
 }, { threshold: 0.15 });
 document.querySelectorAll('.fade-up, .fade-left, .fade-right').forEach(el => observer.observe(el));
+document.querySelectorAll('.objective-card, .governance-card, .team-card, .timeline-item, .work-option, .donation-request-panel, .contact-card, .cms-story-card, .location-card, .card').forEach((el, index) => {
+  el.classList.add('motion-reveal');
+  el.style.setProperty('--motion-delay', `${(index % 4) * 70}ms`);
+  observer.observe(el);
+});
 
 // FILTER
 const objectiveTitles = document.querySelectorAll('.objective-title');
@@ -325,6 +331,41 @@ if (slides.length && carouselDots.length && testimonialTrack && testimonialsCaro
     goToSlide(Number(dot.dataset.slide));
     startTestimonialRotation();
   }));
+  let voicePointerId = null;
+  let voiceStartX = 0;
+  let voiceDeltaX = 0;
+  testimonialsCarousel.addEventListener('pointerdown', event => {
+    if (event.button !== 0 || event.target.closest('button')) return;
+    voicePointerId = event.pointerId;
+    voiceStartX = event.clientX;
+    voiceDeltaX = 0;
+    testimonialsCarousel.setPointerCapture(event.pointerId);
+    testimonialsCarousel.classList.add('is-dragging');
+    clearInterval(testimonialInterval);
+  });
+  testimonialsCarousel.addEventListener('pointermove', event => {
+    if (event.pointerId !== voicePointerId) return;
+    voiceDeltaX = event.clientX - voiceStartX;
+    testimonialTrack.style.transform = `translateX(calc(-${currentSlide * 100}% + ${voiceDeltaX}px))`;
+  });
+  const endVoiceDrag = event => {
+    if (event.pointerId !== voicePointerId) return;
+    const threshold = Math.max(40, testimonialsCarousel.clientWidth * 0.12);
+    if (Math.abs(voiceDeltaX) >= threshold) {
+      goToSlide(currentSlide + (voiceDeltaX < 0 ? 1 : -1));
+    } else {
+      goToSlide(currentSlide);
+    }
+    voicePointerId = null;
+    voiceDeltaX = 0;
+    testimonialsCarousel.classList.remove('is-dragging');
+    if (testimonialsCarousel.hasPointerCapture(event.pointerId)) {
+      testimonialsCarousel.releasePointerCapture(event.pointerId);
+    }
+    startTestimonialRotation();
+  };
+  testimonialsCarousel.addEventListener('pointerup', endVoiceDrag);
+  testimonialsCarousel.addEventListener('pointercancel', endVoiceDrag);
   testimonialsCarousel.addEventListener('mouseenter', () => clearInterval(testimonialInterval));
   testimonialsCarousel.addEventListener('mouseleave', startTestimonialRotation);
   testimonialsCarousel.addEventListener('focusin', () => clearInterval(testimonialInterval));
