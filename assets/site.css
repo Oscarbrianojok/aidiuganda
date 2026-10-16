@@ -582,11 +582,14 @@ footer a:hover { color: var(--yellow); transform: translateX(4px); }
 .fade-up.visible:hover, .fade-left.visible:hover, .fade-right.visible:hover, .motion-reveal.visible:hover { transform: translateY(-4px); }
 .title-reveal { opacity: 1; transform: translateY(12px); transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) var(--motion-delay, 0ms); }
 .title-reveal.visible { transform: translateY(0); }
+.heading-interactive { text-decoration: underline; text-decoration-color: transparent; text-decoration-thickness: 2px; text-underline-offset: 0.18em; transition: color 0.25s ease, text-decoration-color 0.25s ease, transform 0.25s ease; }
+.heading-interactive:hover, .heading-interactive:focus-visible { color: var(--orange-dark); text-decoration-color: var(--orange); transform: translateY(-2px); }
 .section-head .divider.divider-reveal { transform: scaleX(0.7); transform-origin: center; transition: transform 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) 100ms; }
 .section-head .divider.divider-reveal.visible { transform: scaleX(1); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   .fade-up, .fade-left, .fade-right, .motion-reveal, .title-reveal, .divider-reveal { opacity: 1; clip-path: none; transform: none; }
+  .heading-interactive:hover, .heading-interactive:focus-visible { transform: none; }
   .testimonial-track { transition: none; }
 }
 .mission-vision-goal { max-width: 1050px; margin: 72px auto 0; }

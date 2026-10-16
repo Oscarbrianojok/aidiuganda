@@ -210,8 +210,7 @@ if (statCounters.length) {
 // Gently move content into place the first time it enters the viewport.
 const revealElements = document.querySelectorAll([
   '.fade-up', '.fade-left', '.fade-right',
-  '.section-head h1', '.section-head h2', '.section-head .divider', '.work-with-us-heading h1', '.work-with-us-heading h2',
-  '.team-section > h2', '.mission-vision-goal > h2',
+  'h1', 'h2', 'h3', 'h4', '.section-head .divider',
   '.story-quote', '.value-item', '.objective-card', '.governance-card',
   '.team-section', '.team-card', '.timeline-item', '.work-option',
   '.donation-request-panel', '.contact-card', '.contact-form',
@@ -233,8 +232,9 @@ if (reducedMotion || !('IntersectionObserver' in window)) {
     const index = siblingCounts.get(element.parentElement) || 0;
     siblingCounts.set(element.parentElement, index + 1);
     element.style.setProperty('--motion-delay', `${(index % 5) * 65}ms`);
-    if (element.matches('.section-head h1, .section-head h2, .work-with-us-heading h1, .work-with-us-heading h2, .team-section > h2, .mission-vision-goal > h2')) {
+    if (element.matches('h1, h2, h3, h4')) {
       element.classList.add('title-reveal');
+      element.classList.add('heading-interactive');
     } else if (element.matches('.section-head .divider')) {
       element.classList.add('divider-reveal');
     } else if (!element.matches('.fade-up, .fade-left, .fade-right')) {
