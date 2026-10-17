@@ -24,6 +24,8 @@ window.AIDI_SUPABASE_CONFIG = {
 
 The same configuration is used by the public site and `admin.html`. Serve the website over HTTPS (or through a local HTTP development server); browser security prevents the admin editor from reading the static pages when opened directly with `file://`.
 
+The Supabase JavaScript client is included locally at `assets/supabase-js-v2.js`, so the site does not depend on a third-party CDN to load the admin sign-in. Keep this file and its license notice, `assets/SUPABASE_JS_LICENSE.txt`, when publishing the site.
+
 ## 3. Create the database and storage policies
 
 In the Supabase project, open **SQL Editor**, paste the contents of `supabase/schema.sql`, and run it. The script creates the tables, row-level security policies, administrator checks, and public-read image bucket. Contact messages and donation requests can be inserted by site visitors, but can only be read, updated, or deleted by an approved administrator.
